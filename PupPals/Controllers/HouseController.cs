@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,19 +12,29 @@ using PupPals.Models;
 
 namespace PupPals.Controllers
 {
+    [Authorize]
     public class HouseController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public HouseController(ApplicationDbContext context)
+        public HouseController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
+
+        // This task retrieves the currently authenticated user
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
 
         // GET: House
         public async Task<IActionResult> Index()
         {
-            return View(await _context.House.ToListAsync());
+            //only lists houses that the current user has added to the system
+            ApplicationUser user = await GetCurrentUserAsync();
+            var userHouses = _context.House.Where(h => h.User == user);
+            return View(await userHouses.ToListAsync());
         }
 
         // GET: House/Details/5
@@ -54,10 +66,13 @@ namespace PupPals.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Address,City,State,ZipCode,IsResidence,Avoid,Notes")] House house)
+        public async Task<IActionResult> Create(House house)
         {
+            ModelState.Remove("User");
             if (ModelState.IsValid)
             {
+                ApplicationUser user = await GetCurrentUserAsync();
+                house.User = user;
                 _context.Add(house);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
