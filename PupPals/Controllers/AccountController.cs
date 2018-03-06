@@ -236,14 +236,13 @@ namespace PupPals.Controllers
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
+                    //creates a new house record in the database with the information the user added
+                    House house = new House { User = user, Address = model.Address, City = model.City, State = model.State, ZipCode = model.ZipCode, IsResidence = true };
+                    _context.House.Add(house);
+                    await _context.SaveChangesAsync();
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);
-
-                //creates a new house with the information the user added
-                House house = new House { User = user, Address = model.Address, City = model.City, State = model.State, ZipCode = model.ZipCode, IsResidence = true};
-                _context.House.Add(house);
-                await _context.SaveChangesAsync();
             }
 
             // If we got this far, something failed, redisplay form

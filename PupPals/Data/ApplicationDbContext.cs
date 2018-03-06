@@ -12,10 +12,10 @@ namespace PupPals.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options){}
 
-        DbSet<ApplicationUser> ApplicationUser { get; set; }
-        DbSet<House> House { get; set; }
-        DbSet<Pet> Pet { get; set; }
-        DbSet<Owner> Owner { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<House> House { get; set; }
+        public DbSet<Pet> Pet { get; set; }
+        public DbSet<Owner> Owner { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
