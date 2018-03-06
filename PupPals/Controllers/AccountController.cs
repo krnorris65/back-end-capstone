@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PupPals.Data;
 using PupPals.Models;
 using PupPals.Models.AccountViewModels;
 using PupPals.Services;
@@ -24,17 +25,20 @@ namespace PupPals.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly ApplicationDbContext _context;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            _context = context;
         }
 
         [TempData]
@@ -220,7 +224,7 @@ namespace PupPals.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                ApplicationUser user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, PhoneNumber = model.PhoneNumber };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -235,10 +239,16 @@ namespace PupPals.Controllers
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);
+
+                //creates a new house with the information the user added
+                House house = new House { User = user, Address = model.Address, City = model.City, State = model.State, ZipCode = model.ZipCode, IsResidence = true};
+                _context.House.Add(house);
+                await _context.SaveChangesAsync();
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
+
         }
 
         [HttpPost]
