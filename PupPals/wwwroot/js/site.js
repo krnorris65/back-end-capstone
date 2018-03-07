@@ -2,7 +2,14 @@
 
 $(document).ready(function () {
     initMap();
+    $.ajax({
+        url: "House/HouseList",
+        method: "GET"
+    }).then(response => {
+        console.log(response)
+    })
 });
+
 
 
 function initMap() {
@@ -15,4 +22,4 @@ function initMap() {
                 position: uluru,
                 map: map
             });
-        }
+}

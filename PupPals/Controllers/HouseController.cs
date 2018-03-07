@@ -164,5 +164,14 @@ namespace PupPals.Controllers
         {
             return _context.House.Any(e => e.Id == id);
         }
+
+        // GET: House
+        public async Task<IActionResult> HouseList()
+        {
+            //only lists houses that the current user has added to the system
+            ApplicationUser user = await GetCurrentUserAsync();
+            var userHouses = _context.House.Where(h => h.User == user);
+            return Json(userHouses);
+        }
     }
 }
