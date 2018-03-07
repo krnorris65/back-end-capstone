@@ -14,7 +14,7 @@ $(document).ready(function () {
 
 
 function initMap() {
-    var uluru = { lat: 41.3345876, lng: -73.06000929999999 };
+    var uluru = { "lat": 41.3345876, "lng": -73.06000929999999 };
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 15,
                 center: uluru
@@ -27,18 +27,25 @@ function initMap() {
 
 
 //get geocode
-$("#houseCreate").click(evt => {
+$(".houseCreate").click(evt => {
     evt.preventDefault()
     //ajax request to get location
-    const address = $("#createAddress").val()
-    const city = $("#createCity").val()
-    const state = $("#createState").val()
-    const zip = $("#createZip").val()
+    const address = $(".formAddress").val()
+    const city = $(".formCity").val()
+    const state = $(".formState").val()
+    const zip = $(".formZip").val()
     $.ajax({
         method: "GET",
         url: `https://maps.googleapis.com/maps/api/geocode/json?address=${address}+${city}+${state}+${zip}&key=${googleAPI.key}`
     }).then(res => {
-        console.log(res.results["0"].geometry.location)
-        })
-    //submit form
+        //geolocation of the address entered
+        let geoLocation = res.results["0"].geometry.location
+
+        //assign to position input
+        let stringGeo = JSON.stringify(geoLocation)
+        $(".formPosition").val(stringGeo)
+
+        //submit form
+        $('form').submit()
+     })
 })
