@@ -36,6 +36,7 @@ namespace PupPals
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
+            //configures googleAPI key
             services.AddSingleton<IApplicationConfiguration, ApplicationConfiguration>(
                 e => Configuration.GetSection("ApplicationConfiguration")
                         .Get<ApplicationConfiguration>());

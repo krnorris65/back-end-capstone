@@ -49,14 +49,15 @@
     </div>
 
     <environment include="Development">
-        <script type="text/javascript">
+        @* may need this script tag later
+            <script type="text/javascript">
             const googleAPI = Object.create(null, {
                 "key": {
                     get: () => '@AppSettings.GoogleAPIKey'
                 }
             })
             Object.freeze(googleAPI)
-        </script>
+        </script>*@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=@(AppSettings.GoogleAPIKey)"></script>
