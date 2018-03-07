@@ -8,6 +8,10 @@ $(document).ready(function () {
     }).then(response => {
         console.log(response)
 
+        response.forEach(h => {
+            console.log(h)
+        })
+
     })
 });
 
