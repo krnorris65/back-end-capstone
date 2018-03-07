@@ -23,6 +23,8 @@ namespace PupPals.Models
 
         public string ZipCode { get; set; }
 
+        public string Position { get; set; }
+
         [Required]
         public bool IsResidence { get; set;}
 

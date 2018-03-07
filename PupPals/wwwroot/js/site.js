@@ -7,15 +7,16 @@ $(document).ready(function () {
         method: "GET"
     }).then(response => {
         console.log(response)
+
     })
 });
 
 
 
 function initMap() {
-            var uluru = { lat: -25.363, lng: 131.044 };
+    var uluru = { lat: 41.3345876, lng: -73.06000929999999 };
             var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 4,
+                zoom: 15,
                 center: uluru
             });
             var marker = new google.maps.Marker({
@@ -23,3 +24,21 @@ function initMap() {
                 map: map
             });
 }
+
+
+//get geocode
+$("#houseCreate").click(evt => {
+    evt.preventDefault()
+    //ajax request to get location
+    const address = $("#createAddress").val()
+    const city = $("#createCity").val()
+    const state = $("#createState").val()
+    const zip = $("#createZip").val()
+    $.ajax({
+        method: "GET",
+        url: `https://maps.googleapis.com/maps/api/geocode/json?address=${address}+${city}+${state}+${zip}&key=${googleAPI.key}`
+    }).then(res => {
+        console.log(res.results["0"].geometry.location)
+        })
+    //submit form
+})
