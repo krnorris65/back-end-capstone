@@ -36,6 +36,10 @@ namespace PupPals
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
+            services.AddSingleton<IApplicationConfiguration, ApplicationConfiguration>(
+                e => Configuration.GetSection("ApplicationConfiguration")
+                        .Get<ApplicationConfiguration>());
+
             services.AddMvc();
         }
 
