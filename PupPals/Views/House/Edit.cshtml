@@ -36,14 +36,7 @@
             <div class="form-group">
                 <div class="checkbox">
                     <label>
-                        <input asp-for="IsResidence" /> @Html.DisplayNameFor(model => model.IsResidence)
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="Avoid" /> @Html.DisplayNameFor(model => model.Avoid)
+                        <input asp-for="Avoid" /> Avoid this house during walks
                     </label>
                 </div>
             </div>
@@ -60,7 +53,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Home" asp-action="Index">Go to Map</a>
 </div>
 
 @section Scripts {

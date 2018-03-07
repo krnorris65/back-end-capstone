@@ -34,13 +34,6 @@
             <div class="form-group">
                 <div class="checkbox">
                     <label>
-                        <input asp-for="IsResidence" /> I live here!
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
                         <input asp-for="Avoid" /> Avoid this house during walks
                     </label>
                 </div>
@@ -58,7 +51,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Home" asp-action="Index">Back to Map</a>
 </div>
 
 @section Scripts {

@@ -1,7 +1,17 @@
-﻿@{
+﻿
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
     ViewData["Title"] = "Landing Page";
 }
-<div>
 
-<a asp-controller="House" asp-action="Create" class="btn btn-default">Add New Encounter</a>
-</div>
+<h2>Welcome to Pup Pals</h2>
+@if (SignInManager.IsSignedIn(User))
+{
+    <div>
+
+        <a asp-controller="House" asp-action="Create" class="btn btn-default">Add New Encounter</a>
+    </div>
+
+    <div id="map"></div>
+}
