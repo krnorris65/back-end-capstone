@@ -1,55 +1,63 @@
-﻿// Write your JavaScript code.
+﻿//only runs function when on the landing page
+if (window.location.pathname == "/") {
 
-$(document).ready(function () {
-    initMap();
-    $.ajax({
-        url: "House/HouseList",
-        method: "GET"
-    }).then(response => {
-        console.log(response)
+    $(document).ready(function () {
+        $.ajax({
+            url: "House/HouseList",
+            method: "GET"
+        }).then(response => {
+            let myHouse = response.filter(h => h.isResidence === true)[0]
 
-        response.forEach(h => {
-            console.log(h)
-        })
-
-    })
-});
-
-
-
-function initMap() {
-    var uluru = { "lat": 41.3345876, "lng": -73.06000929999999 };
-            var map = new google.maps.Map(document.getElementById('map'), {
+            //create map and center around the user's house
+            let homeMap = new google.maps.Map(document.getElementById('map'), {
                 zoom: 15,
-                center: uluru
+                //position is stored as a string so it must be parsed
+                center: JSON.parse(myHouse.position)
             });
-            var marker = new google.maps.Marker({
-                position: uluru,
-                map: map
-            });
+
+            //creates markers for all of the houses associated with that user
+            response.forEach(h => {
+                let marker = new google.maps.Marker({
+                    //position is stored as a string so it must be parsed
+                    position: JSON.parse(h.position),
+                    //put markers on map created above
+                    map: homeMap
+                });
+            })
+        })
+    });
 }
 
-
-//get geocode
+//get geocode of address
 $(".houseCreate").click(evt => {
-    evt.preventDefault()
-    //ajax request to get location
     const address = $(".formAddress").val()
     const city = $(".formCity").val()
     const state = $(".formState").val()
     const zip = $(".formZip").val()
-    $.ajax({
-        method: "GET",
-        url: `https://maps.googleapis.com/maps/api/geocode/json?address=${address}+${city}+${state}+${zip}&key=${googleAPI.key}`
-    }).then(res => {
-        //geolocation of the address entered
-        let geoLocation = res.results["0"].geometry.location
+    //if the required fields are not null then do an ajax request to get geolocation before submitting form
+    if (address != "" && city != "" && state != "") {
+        //prevent form from sending before geolocation is captured
+        evt.preventDefault()
 
-        //assign to position input
-        let stringGeo = JSON.stringify(geoLocation)
-        $(".formPosition").val(stringGeo)
+        $.ajax({
+            method: "GET",
+            url: `https://maps.googleapis.com/maps/api/geocode/json?address=${address}+${city}+${state}+${zip}&key=${googleAPI.key}`
+        }).then(res => {
+            //if the results only return one result, set that as the geolocation
+            if (res.results.length == 1) {
+                //geolocation of the address entered
+                let geoLocation = res.results["0"].geometry.location
 
-        //submit form
-        $('form').submit()
-     })
+                //assign to position input
+                let stringGeo = JSON.stringify(geoLocation)
+                $(".formPosition").val(stringGeo)
+
+                //submit form
+                $('form').submit()
+            } else {
+                //if the results have more than one result or no results alert the user of the address not being found
+                alert("Address not found")
+            }
+        })
+    }
 })
