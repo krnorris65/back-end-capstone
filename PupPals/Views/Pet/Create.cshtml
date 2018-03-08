@@ -1,0 +1,79 @@
+﻿@model PupPals.Models.PetViewModels.PetCreateViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>*Indicates Required Field</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="MyPet" /> This is my pet!
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label">Type of Animal*</label>
+                <input asp-for="Type" class="form-control" placeholder="ex. dog, cat, etc." />
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Description of Animal*</label>
+                <textarea asp-for="Description" class="form-control" placeholder="ex. color, size, notable features"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+               <div class="col-md-10">
+                    <h4>House Options</h4>
+                    @Html.DropDownList(
+                    "HouseId",
+                     @Model.HouseList,
+                    new
+                       {
+                           @name = "HouseId",
+                           @class = "form-control"
+                       }
+                    )
+                    <span asp-validation-for="@Model.House.Id" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="BestFriend" /> My Pet's Best Friend
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notes" class="control-label"></label>
+                <textarea asp-for="Notes" class="form-control"></textarea>
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
