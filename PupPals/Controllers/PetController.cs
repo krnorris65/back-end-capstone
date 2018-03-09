@@ -86,7 +86,7 @@ namespace PupPals.Controllers
             //gets the current user
             ApplicationUser _user = await GetCurrentUserAsync();
 
-            //displays list of houses
+            //displays pet info and list of houses drop down
             PetCreateViewModel petView = new PetCreateViewModel(_context, _user);
 
             return View(petView);
@@ -109,7 +109,7 @@ namespace PupPals.Controllers
             //gets the current user
             ApplicationUser _user = await GetCurrentUserAsync();
 
-            //displays list of houses
+            //displays pet info and list of houses in a drop down
             PetEditViewModel petEditView = new PetEditViewModel(_context, _user, _pet);
 
             return View(petEditView);

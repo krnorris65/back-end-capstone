@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PupPals.Data;
 using PupPals.Models;
+using PupPals.Models.HouseViewModels;
 
 namespace PupPals.Controllers
 {
@@ -52,7 +53,11 @@ namespace PupPals.Controllers
                 return NotFound();
             }
 
-            return View(house);
+            ApplicationUser user = await GetCurrentUserAsync();
+
+            HouseInfoViewModel houseDetails = new HouseInfoViewModel(_context, user, house);
+
+            return View(houseDetails);
         }
 
         // GET: House/Create

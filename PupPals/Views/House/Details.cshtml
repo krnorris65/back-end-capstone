@@ -1,4 +1,4 @@
-﻿@model PupPals.Models.House
+﻿@model PupPals.Models.HouseViewModels.HouseInfoViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -53,6 +53,13 @@
             @Html.DisplayFor(model => model.Notes)
         </dd>
     </dl>
+    @foreach(var item in Model.PetList)
+    {
+        <p>
+            @Html.DisplayFor(modelItem => item.Name)
+        </p>
+
+    }
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
