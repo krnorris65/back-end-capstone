@@ -101,17 +101,20 @@ namespace PupPals.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Address,City,State,ZipCode,IsResidence,Avoid,Notes")] House house)
+        public async Task<IActionResult> Edit(int id, House house)
         {
             if (id != house.Id)
             {
                 return NotFound();
             }
 
+            ModelState.Remove("User");
             if (ModelState.IsValid)
             {
                 try
                 {
+                    ApplicationUser user = await GetCurrentUserAsync();
+                    house.User = user;
                     _context.Update(house);
                     await _context.SaveChangesAsync();
                 }

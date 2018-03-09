@@ -60,9 +60,9 @@ namespace PupPals.Controllers
             ApplicationUser _user = await GetCurrentUserAsync();
 
             //displays list of houses
-            PetCreateViewModel houseList = new PetCreateViewModel(_context, _user);
-            //ViewData["HouseId"] = new SelectList(_context.House, "Id", "Address");
-            return View(houseList);
+            PetCreateViewModel petView = new PetCreateViewModel(_context, _user);
+
+            return View(petView);
         }
 
         // POST: Pet/Create
@@ -81,11 +81,15 @@ namespace PupPals.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["HouseId"] = new SelectList(_context.House, "Id", "Address", pet.HouseId);
-    
+ 
+
+            //gets the current user
+            ApplicationUser _user = await GetCurrentUserAsync();
+
             //displays list of houses
-            //PetCreateViewModel houseList = new PetCreateViewModel(_context, _user);
-            return View(pet);
+            PetCreateViewModel petView = new PetCreateViewModel(_context, _user);
+
+            return View(petView);
         }
 
         // GET: Pet/Edit/5
@@ -96,13 +100,19 @@ namespace PupPals.Controllers
                 return NotFound();
             }
 
-            var pet = await _context.Pet.SingleOrDefaultAsync(m => m.Id == id);
-            if (pet == null)
+            var _pet = await _context.Pet.SingleOrDefaultAsync(m => m.Id == id);
+            if (_pet == null)
             {
                 return NotFound();
             }
-            ViewData["HouseId"] = new SelectList(_context.House, "Id", "Address", pet.HouseId);
-            return View(pet);
+
+            //gets the current user
+            ApplicationUser _user = await GetCurrentUserAsync();
+
+            //displays list of houses
+            PetEditViewModel petEditView = new PetEditViewModel(_context, _user, _pet);
+
+            return View(petEditView);
         }
 
         // POST: Pet/Edit/5
@@ -110,17 +120,20 @@ namespace PupPals.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Type,Description,HouseId,MyPet,BestFriend,Notes,Photo")] Pet pet)
+        public async Task<IActionResult> Edit(int id, Pet pet)
         {
             if (id != pet.Id)
             {
                 return NotFound();
             }
 
+            ModelState.Remove("User");
             if (ModelState.IsValid)
             {
                 try
                 {
+                    ApplicationUser user = await GetCurrentUserAsync();
+                    pet.User = user;
                     _context.Update(pet);
                     await _context.SaveChangesAsync();
                 }

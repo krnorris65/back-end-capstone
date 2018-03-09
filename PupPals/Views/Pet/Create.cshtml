@@ -6,7 +6,7 @@
 
 <h2>Create</h2>
 
-<h4>*Indicates Required Field</h4>
+<h6>*Indicates Required Field</h6>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -31,24 +31,25 @@
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label">Description of Animal*</label>
-                <textarea asp-for="Description" class="form-control" placeholder="ex. color, size, notable features"></textarea>
+                <textarea asp-for="Description" class="form-control" placeholder="ex. breed, color, size, notable features"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             
             <div class="form-group">
-               <div class="col-md-10">
-                    <h4>House Options</h4>
+                <div class="col-md-10">
+                    <label class="control-label">Lives at*:</label>
                     @Html.DropDownList(
-                    "HouseId",
-                     @Model.HouseList,
-                    new
-                       {
-                           @name = "HouseId",
-                           @class = "form-control"
-                       }
+                         "HouseId",
+                          @Model.HouseList,
+                         new
+                         {
+                             @name = "HouseId",
+                             @class = "form-control"
+                         }
                     )
-                    <span asp-validation-for="@Model.House.Id" class="text-danger"></span>
                 </div>
+                <span asp-validation-for="@Model.HouseId" class="text-danger"></span>
+
             </div>
             
             <div class="form-group">

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PupPals.Models.PetViewModels
 {
-    public class PetCreateViewModel
+    public class PetEditViewModel
     {
         public string Name { get; set; }
 
@@ -18,32 +18,10 @@ namespace PupPals.Models.PetViewModels
         [Required]
         public string Description { get; set; }
 
-        [Required]
-        [Range(1, int.MaxValue, ErrorMessage = "Please select a house")]
-        public int HouseId { get; set; }
+
 
         public List<SelectListItem> HouseList { get; set; }
         public House House { get; set; }
-
-        public PetCreateViewModel(ApplicationDbContext ctx, ApplicationUser usr)
-        {
-
-            this.HouseList = ctx.House
-                                    .Where(h => h.User == usr)
-                                    .AsEnumerable()
-                                    .Select(li => new SelectListItem
-                                    {
-                                        Text = li.Address + ", " + li.City + ", " + li.State,
-                                        Value = li.Id.ToString()
-                                    }).ToList();
-
-            this.HouseList.Insert(0, new SelectListItem
-            {
-                Text = "select address",
-                Value = "0"
-            });
-        }
-
 
         [Required]
         public bool MyPet { get; set; }
@@ -53,5 +31,30 @@ namespace PupPals.Models.PetViewModels
         public string Notes { get; set; }
 
         public string Photo { get; set; }
+
+        public PetEditViewModel(ApplicationDbContext ctx, ApplicationUser usr, Pet _pet)
+        {
+
+            this.HouseList = ctx.House
+                                    .Where(h => h.User == usr)
+                                    .AsEnumerable()
+                                    .Select(li => new SelectListItem
+                                    {
+                                        Text = li.Address + ", " + li.City + ", " + li.State,
+                                        Value = li.Id.ToString(),
+                                        Selected = li.Id == _pet.HouseId ? true : false
+                                    }).ToList();
+
+
+            this.Name = _pet.Name;
+            this.Type = _pet.Type;
+            this.Description = _pet.Description;
+            this.MyPet = _pet.MyPet;
+            this.BestFriend = _pet.BestFriend;
+            this.Notes = _pet.Notes;
+            this.Photo = _pet.Photo;
+            this.House = _pet.House;
+
+    }
     }
 }

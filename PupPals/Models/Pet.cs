@@ -20,6 +20,7 @@ namespace PupPals.Models
         public string Description { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Please select a house")]
         public int HouseId { get; set; }
         public House House { get; set; }
 
