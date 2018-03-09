@@ -47,14 +47,22 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Notes)
             </td>
-            <td></td>
+            <td>
+                @foreach (var owner in item.OwnerList)
+                {
+
+            @Html.DisplayFor(modelItem => owner.FirstName) <span></span> @Html.DisplayFor(modelI => owner.LastName) <br />
+
+                }
+                @*<a asp-controller="Pet" asp-action="Create">Add Pet</a>*@
+            </td>
             <td>
                 @foreach (var pet in item.PetList)
-    {
+                {
 
-            @Html.DisplayFor(modelItem => pet.Type) <span>-</span> @Html.DisplayFor(modelI => pet.Name) <br />
+                    @Html.DisplayFor(modelItem => pet.Type) <span>-</span> @Html.DisplayFor(modelI => pet.Name) <br />
 
-}
+                 }
                 <a asp-controller="Pet" asp-action="Create">Add Pet</a>
             </td>
 
@@ -63,7 +71,6 @@
         <tr>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
