@@ -35,5 +35,9 @@ namespace PupPals.Models
 
         [Required]
         public ApplicationUser User { get; set; }
+
+        public ICollection<Pet> PetList { get; set; }
+
+        public ICollection<Owner> OwnerList { get; set; }
     }
 }

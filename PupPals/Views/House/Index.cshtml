@@ -12,28 +12,15 @@
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Address)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.City)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.State)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ZipCode)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsResidence)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Avoid)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Notes)
-                </th>
-            <th></th>
+            <th>Address</th>
+            <th> City</th>
+            <th>State</th>
+            <th>Zip Code</th>
+            <th>My House</th>
+            <th>Avoid</th>
+            <th> Notes</th>
+            <th>Owners </th>
+            <th> Pets </th>
         </tr>
     </thead>
     <tbody>
@@ -60,18 +47,27 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Notes)
             </td>
+            <td></td>
+            <td>
+                @foreach (var pet in item.PetList)
+    {
+
+            @Html.DisplayFor(modelItem => pet.Type) <span>-</span> @Html.DisplayFor(modelI => pet.Name) <br />
+
+}
+                <a asp-controller="Pet" asp-action="Create">Add Pet</a>
+            </td>
+
+            </tr>
+
+        <tr>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-        <tr>
-            <td>Pet List</td> 
-        </tr>
-        <tr>
-            <td>Owners</td>
-        </tr>
+
 }
     </tbody>
 </table>

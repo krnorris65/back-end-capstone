@@ -34,7 +34,7 @@ namespace PupPals.Controllers
         {
             //only lists houses that the current user has added to the system
             ApplicationUser user = await GetCurrentUserAsync();
-            var userHouses = _context.House.Where(h => h.User == user);
+            var userHouses = _context.House.Include(h => h.PetList).Where(h => h.User == user);
             return View(await userHouses.ToListAsync());
         }
 
@@ -46,8 +46,9 @@ namespace PupPals.Controllers
                 return NotFound();
             }
 
-            var house = await _context.House
+            var house = await _context.House.Include(h => h.PetList)
                 .SingleOrDefaultAsync(m => m.Id == id);
+
             if (house == null)
             {
                 return NotFound();
@@ -55,9 +56,7 @@ namespace PupPals.Controllers
 
             ApplicationUser user = await GetCurrentUserAsync();
 
-            HouseInfoViewModel houseDetails = new HouseInfoViewModel(_context, user, house);
-
-            return View(houseDetails);
+            return View(house);
         }
 
         // GET: House/Create
