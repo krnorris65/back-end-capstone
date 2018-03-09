@@ -28,8 +28,8 @@ namespace PupPals.Models.HouseViewModels
 
         public string Notes { get; set; }
 
-        List<Pet> PetList { get; set; }
+        public List<Pet> PetList { get; set; }
 
-        List<Owner> OwnerList { get; set; }
+        public List<Owner> OwnerList { get; set; }
     }
 }
