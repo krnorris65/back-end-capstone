@@ -5,10 +5,6 @@
 }
 
 
-<p>
-    <a asp-action="Create">Add Pet</a>
-</p>
-
 <h2>My Pets</h2>
 <table class="table">
     <thead>
@@ -44,7 +40,17 @@
                 @Html.DisplayFor(modelItem => item.Notes)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.House.Address)
+                @if (item.House.IsResidence == true)
+                {
+                    <span class="glyphicon glyphicon-home"></span> @Html.DisplayFor(modelItem => item.House.Address)
+
+                }
+                else
+                {
+
+                     @Html.DisplayFor(modelItem => item.House.Address)
+
+                }
             </td>
         </tr>
     <tr>

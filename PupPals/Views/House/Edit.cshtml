@@ -33,6 +33,8 @@
                 <input asp-for="ZipCode" class="formZip form-control" />
                 <span asp-validation-for="ZipCode" class="text-danger"></span>
             </div>
+            @if (Model.IsResidence == false)
+            {
             <div class="form-group">
                 <div class="checkbox">
                     <label>
@@ -40,6 +42,7 @@
                     </label>
                 </div>
             </div>
+            }
             <div class="form-group">
                 <label asp-for="Notes" class="control-label"></label>
                 <textarea asp-for="Notes" class="form-control"></textarea>
