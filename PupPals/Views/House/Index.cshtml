@@ -4,7 +4,7 @@
     ViewData["Title"] = "House List";
 }
 
-<h2>Index</h2>
+<h2>Houses on Map</h2>
 
 <p>
     <a asp-action="Create">Add New House</a>
@@ -51,7 +51,7 @@
                 @foreach (var owner in item.OwnerList)
                 {
 
-            @Html.DisplayFor(modelItem => owner.FirstName) <span></span> @Html.DisplayFor(modelI => owner.LastName) <br />
+            @Html.DisplayFor(modelItem => owner.FirstName) <text> </text> @Html.DisplayFor(modelI => owner.LastName) <br />
 
                 }
                 @*<a asp-controller="Pet" asp-action="Create">Add Pet</a>*@
@@ -60,7 +60,7 @@
                 @foreach (var pet in item.PetList)
                 {
 
-                    @Html.DisplayFor(modelItem => pet.Type) <span>-</span> @Html.DisplayFor(modelI => pet.Name) <br />
+                    @Html.DisplayFor(modelItem => pet.Type) <text>- </text> @Html.DisplayFor(modelI => pet.Name) <br />
 
                  }
                 <a asp-controller="Pet" asp-action="Create">Add Pet</a>
