@@ -65,16 +65,31 @@
             <td>
                 @foreach (var pet in item.PetList)
                 {
-                    @if(pet.Name != null)
+                    @if (pet.BestFriend == true)
                     {
-                        @Html.DisplayFor(modelItem => pet.Name) <text> (</text> @Html.DisplayFor(modelI => pet.Type) <text>)</text><br />
-                    }
-                    else
-                    {
-                        @Html.DisplayFor(modelItem => pet.Type) <br />
+                        
 
-                    }
+                        @if (pet.Name != null)
+                        {
+                            @Html.DisplayFor(modelItem => pet.Name) <text> (</text> @Html.DisplayFor(modelI => pet.Type) <text>)</text> <span class="glyphicon glyphicon-star"></span><br />
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => pet.Type) <span class="glyphicon glyphicon-star"></span><br />
 
+                        }
+                    }
+                    else {
+                        @if (pet.Name != null)
+                        {
+                            @Html.DisplayFor(modelItem => pet.Name) <text> (</text> @Html.DisplayFor(modelI => pet.Type) <text>)</text><br />
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => pet.Type) <br />
+
+                        }
+                    }
                  }
                 <a asp-controller="Pet" asp-action="Create">Add Pet</a>
             </td>
