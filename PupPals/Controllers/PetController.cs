@@ -30,8 +30,10 @@ namespace PupPals.Controllers
         // GET: Pet
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Pet.Include(p => p.House);
-            return View(await applicationDbContext.ToListAsync());
+            ApplicationUser _user = await GetCurrentUserAsync();
+
+            PetListViewModel petList = new PetListViewModel(_context, _user);
+            return View(petList);
         }
 
         // GET: Pet/Details/5
@@ -59,7 +61,7 @@ namespace PupPals.Controllers
             //gets the current user
             ApplicationUser _user = await GetCurrentUserAsync();
 
-            //displays list of houses
+            //displays pet info and list of houses drop down
             PetCreateViewModel petView = new PetCreateViewModel(_context, _user);
 
             return View(petView);
