@@ -36,7 +36,7 @@
             </div>
 
             <div class="form-group">
-                <div class="col-md-10">
+                <div>
                     <label class="control-label">Lives at*:</label>
                     @Html.DropDownList(
                       "HouseId",
@@ -44,7 +44,7 @@
                       new
                       {
                           @selected = @Model.House.Id,
-                          @class = "form-control",
+                          @class = "form-control"
                       }
                       )
                     <span asp-validation-for="@Model.House.Id" class="text-danger"></span>
