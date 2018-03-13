@@ -6,40 +6,42 @@
 
 <h3>@Html.DisplayFor(modelItem => modelItem.Address)</h3>
 
-    @* if the house is the user's residence, add the house icon before the address *@
-    @if(Model.IsResidence) {
-        <h5><span class="glyphicon glyphicon-home"></span> This is my house</h5>
-    }
-    @* if the house is marked to avoid, add the avoid icon before the address *@
-    @if (Model.Avoid) {
-        <h5><span class="glyphicon glyphicon-ban-circle" style="color:red"></span> Avoid this house on walks</h5>
-    }
+@* if the house is the user's residence, add the house icon before the address *@
+@if (Model.IsResidence)
+{
+    <h5><span class="glyphicon glyphicon-home"></span> This is my house</h5>
+}
+@* if the house is marked to avoid, add the avoid icon before the address *@
+@if (Model.Avoid)
+{
+    <h5><span class="glyphicon glyphicon-ban-circle" style="color:red"></span> Avoid this house on walks</h5>
+}
 
-    @if(Model.PetList.Any(p => p.BestFriend))
-    {
-        <h5><span class="glyphicon glyphicon-star" style="color:darkgoldenrod"></span> One of my pet's best friends lives here!</h5>
+@if (Model.PetList.Any(p => p.BestFriend))
+{
+    <h5><span class="glyphicon glyphicon-star" style="color:darkgoldenrod"></span> One of my pet's best friends lives here!</h5>
 
-    }
+}
 
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>Address</dt>
-        <dd>
-            @Html.DisplayFor(model => model.Address) <br />
-            @Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State) @Html.DisplayFor(model => model.ZipCode)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Notes)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Notes)
-        </dd>
-        <dt></dt>
-        <dd>
-            <a asp-action="Edit" asp-route-id="@Model.Id"><span class="glyphicon glyphicon-edit"></span></a> |
-            <a asp-action="Delete" asp-route-id="@Model.Id"><span class="glyphicon glyphicon-trash"></span></a>
-        </dd>
-    </dl>
+<hr />
+<dl class="dl-horizontal">
+    <dt>Address</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Address) <br />
+        @Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.State) @Html.DisplayFor(model => model.ZipCode)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Notes)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Notes)
+    </dd>
+    <dt></dt>
+    <dd>
+        <a asp-action="Edit" asp-route-id="@Model.Id"><span class="glyphicon glyphicon-edit"></span></a> |
+        <a asp-action="Delete" asp-route-id="@Model.Id"><span class="glyphicon glyphicon-trash"></span></a>
+    </dd>
+</dl>
 
 
 <table class="table">
@@ -51,42 +53,50 @@
             <th></th>
         </tr>
     </thead>
+    <tbody>
     @foreach (var item in Model.PetList)
     {
-        <tbody>
-            <tr>
-                @if (item.Name != null)
-                {
-                    <td>
-                        @if (item.BestFriend)
-                        {
-                            <span class="glyphicon glyphicon-star" style="color:darkgoldenrod"></span>
-                        }
-                        @Html.DisplayFor(modelItem => item.Name) (@Html.DisplayFor(modelItem => item.Type))
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Type)
-                    </td>
-
-                }
-
+        <tr>
+            @if (item.Name != null)
+            {
                 <td>
-                    @Html.DisplayFor(modelItem => item.Description)
+                    @if (item.BestFriend)
+                    {
+                        <span class="glyphicon glyphicon-star" style="color:darkgoldenrod"></span>
+                    }
+                    @Html.DisplayFor(modelItem => item.Name) (@Html.DisplayFor(modelItem => item.Type))
                 </td>
+            }
+            else
+            {
                 <td>
-                    @Html.DisplayFor(modelItem => item.Notes)
+                    @Html.DisplayFor(modelItem => item.Type)
                 </td>
 
-                <td>
-                    <a asp-controller="Pet" asp-action="Edit" asp-route-id="@item.Id"><span class="glyphicon glyphicon-edit"></span></a> |
-                    <a asp-controller="Pet" asp-action="Delete" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
-        </tbody>
+            }
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+
+            <td>
+                <a asp-controller="Pet" asp-action="Edit" asp-route-id="@item.Id"><span class="glyphicon glyphicon-edit"></span></a> |
+                <a asp-controller="Pet" asp-action="Delete" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash"></span></a>
+            </td>
+        </tr>
     }
+        <tr>
+            <td>
+                <a asp-controller="Pet" asp-action="Create">Add Pet</a>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
 </table>
 
 <table class="table">
@@ -117,6 +127,13 @@
                 </td>
             </tr>
         }
+            <tr>
+                <td>
+                    <a asp-controller="Owner" asp-action="Create">Add Owner</a>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
     </tbody>
 </table>
-

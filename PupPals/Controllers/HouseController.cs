@@ -79,7 +79,7 @@ namespace PupPals.Controllers
                 house.User = user;
                 _context.Add(house);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { @id = house.Id });
             }
             return View(house);
         }
@@ -133,7 +133,8 @@ namespace PupPals.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { @id = house.Id });
+
             }
             return View(house);
         }

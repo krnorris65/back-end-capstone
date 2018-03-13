@@ -7,7 +7,7 @@ if (window.location.pathname == "/") {
             method: "GET"
         }).then(response => {
             let myHouse = response.filter(h => h.isResidence === true)[0]
-
+            console.log(myHouse)
             //create map and center around the user's house
             let homeMap = new google.maps.Map(document.getElementById('map'), {
                 zoom: 15,
