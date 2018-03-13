@@ -52,13 +52,11 @@
 
                 }
             </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id"><span class="glyphicon glyphicon-edit"></span></a> |
+                <a asp-action="Delete" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash"></span></a>
+            </td>
         </tr>
-    <tr>
-    <td>
-        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-    </td>
-</tr>
 }
     </tbody>
 </table>
@@ -100,16 +98,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.House.Address)
             </td>
-            <td></td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id"><span class="glyphicon glyphicon-edit"></span></a> |
+                <a asp-action="Delete" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash"></span></a>
+            </td>
         </tr>
-<tr>
-    <td>
-        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-    </td>
-
-
-</tr>
 }
     </tbody>
 </table>
