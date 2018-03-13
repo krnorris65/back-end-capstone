@@ -57,9 +57,8 @@ namespace PupPals.Controllers
         }
 
         // GET: Owner/Create
-        public async Task<IActionResult> Create()
+        public IActionResult Create(int? house)
         {
-            ApplicationUser _user = await GetCurrentUserAsync();
 
             return View();
         }
@@ -71,10 +70,9 @@ namespace PupPals.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Owner owner, int house)
         {
-            ModelState.Remove("HouseId");
+            owner.HouseId = house;
             if (ModelState.IsValid)
             {
-                owner.HouseId = house;
                 _context.Add(owner);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Details), "House", new { id = owner.HouseId }); ;
