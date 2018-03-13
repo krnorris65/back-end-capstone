@@ -40,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.Notes)
             </td>
             <td>
-                @if (item.House.IsResidence == true)
+                @if (item.House.IsResidence)
                 {
                     <span class="glyphicon glyphicon-home"></span> @Html.DisplayFor(modelItem => item.House.Address)
 

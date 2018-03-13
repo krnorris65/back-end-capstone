@@ -46,7 +46,7 @@ namespace PupPals.Controllers
                 return NotFound();
             }
 
-            var house = await _context.House.Include(h => h.PetList)
+            var house = await _context.House.Include(h => h.PetList).Include(h => h.OwnerList)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
             if (house == null)
