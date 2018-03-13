@@ -25,6 +25,5 @@ namespace PupPals.Models
         public int HouseId { get; set; }
         public House House { get; set; }
 
-        public string Notes { get; set; }
     }
 }

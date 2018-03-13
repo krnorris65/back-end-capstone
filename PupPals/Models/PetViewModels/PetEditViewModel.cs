@@ -34,7 +34,7 @@ namespace PupPals.Models.PetViewModels
 
         public PetEditViewModel(ApplicationDbContext ctx, ApplicationUser usr, Pet _pet)
         {
-
+            //creates a dropdown list of the houses that the user has added and preselects the house that is currently set for that pet
             this.HouseList = ctx.House
                                     .Where(h => h.User == usr)
                                     .AsEnumerable()

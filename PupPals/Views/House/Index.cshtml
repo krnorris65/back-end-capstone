@@ -60,7 +60,7 @@
             @Html.DisplayFor(modelItem => owner.FirstName) <text> </text> @Html.DisplayFor(modelI => owner.LastName) <br />
 
                 }
-                @*<a asp-controller="Pet" asp-action="Create">Add Pet</a>*@
+                <a asp-controller="Owner" asp-action="Create">Add Contact</a>
             </td>
             <td>
                 @foreach (var pet in item.PetList)

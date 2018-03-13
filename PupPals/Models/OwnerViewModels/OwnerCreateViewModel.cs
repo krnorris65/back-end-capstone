@@ -6,17 +6,19 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PupPals.Models.PetViewModels
+namespace PupPals.Models.OwnerViewModels
 {
-    public class PetCreateViewModel
+    public class OwnerCreateViewModel
     {
-        public string Name { get; set; }
+        [Required]
+        public string FirstName { get; set; }
 
         [Required]
-        public string Type { get; set; }
+        public string LastName { get; set; }
 
-        [Required]
-        public string Description { get; set; }
+        public string Phone { get; set; }
+
+        public string Email { get; set; }
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Please select a house")]
@@ -25,7 +27,7 @@ namespace PupPals.Models.PetViewModels
         public List<SelectListItem> HouseList { get; set; }
         public House House { get; set; }
 
-        public PetCreateViewModel(ApplicationDbContext ctx, ApplicationUser usr)
+        public OwnerCreateViewModel(ApplicationDbContext ctx, ApplicationUser usr)
         {
             //creates a dropdown list of the houses that the user has added
             this.HouseList = ctx.House
@@ -43,15 +45,5 @@ namespace PupPals.Models.PetViewModels
                 Value = "0"
             });
         }
-
-
-        [Required]
-        public bool MyPet { get; set; }
-
-        public bool BestFriend { get; set; }
-
-        public string Notes { get; set; }
-
-        public string Photo { get; set; }
     }
 }
