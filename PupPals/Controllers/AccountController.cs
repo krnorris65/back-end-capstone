@@ -239,6 +239,9 @@ namespace PupPals.Controllers
                     //creates a new house record in the database with the information the user added
                     House house = new House { User = user, Address = model.Address, City = model.City, State = model.State, ZipCode = model.ZipCode, Position = model.Position, IsResidence = true };
                     _context.House.Add(house);
+                    //creates owner for house with information added
+                    Owner owner = new Owner { FirstName = model.FirstName, LastName = model.LastName, Phone = model.PhoneNumber, Email = model.Email, HouseId = house.Id };
+                    _context.Owner.Add(owner);
                     await _context.SaveChangesAsync();
                     return RedirectToLocal(returnUrl);
                 }
