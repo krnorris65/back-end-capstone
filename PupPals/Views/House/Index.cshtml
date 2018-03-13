@@ -24,12 +24,18 @@
         <tr>
             <td>
                 @* if the house is the user's residence, add the house icon before the address *@
-                @if(item.IsResidence == true) {
+                @if(item.IsResidence) {
                     <span class="glyphicon glyphicon-home"></span>
                 }
                 @* if the house is marked to avoid, add the avoid icon before the address *@
-                @if (item.Avoid == true) {
+                @if (item.Avoid) {
                     <span class="glyphicon glyphicon-ban-circle" style="color:red"></span>
+                }
+
+                @if(item.PetList.Any(p => p.BestFriend))
+                {
+                    <span class="glyphicon glyphicon-star"style="color:darkgoldenrod"></span>
+
                 }
 
                 @Html.DisplayFor(modelItem => item.Address)<br />
@@ -50,21 +56,7 @@
             <td>
                 @foreach (var pet in item.PetList)
                 {
-                    @if (pet.BestFriend == true)
-                    {
-                        
-
-                        @if (pet.Name != null)
-                        {
-                            <span class="glyphicon glyphicon-star"></span> @Html.DisplayFor(modelItem => pet.Name) <text> (</text> @Html.DisplayFor(modelI => pet.Type) <text>)</text><br />
-                        }
-                        else
-                        {
-                            <span class="glyphicon glyphicon-star"></span> @Html.DisplayFor(modelItem => pet.Type) <br />
-
-                        }
-                    }
-                    else {
+                   
                         @if (pet.Name != null)
                         {
                             @Html.DisplayFor(modelItem => pet.Name) <text> (</text> @Html.DisplayFor(modelI => pet.Type) <text>)</text><br />
@@ -74,7 +66,6 @@
                             @Html.DisplayFor(modelItem => pet.Type) <br />
 
                         }
-                    }
                  }
                 <a asp-controller="Pet" asp-action="Create">Add Pet</a>
             </td>
