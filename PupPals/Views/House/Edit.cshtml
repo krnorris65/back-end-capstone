@@ -56,7 +56,10 @@
 </div>
 
 <div>
-    <a asp-controller="Home" asp-action="Index">Go to Map</a>
+    <a asp-action="Details" asp-route-id="@Model.Id">Back to House Info</a>
+</div>
+<div>
+    <a  asp-action="Index">Back to House List</a>
 </div>
 
 @section Scripts {

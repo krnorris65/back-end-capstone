@@ -34,6 +34,11 @@
         <dd>
             @Html.DisplayFor(model => model.Notes)
         </dd>
+        <dt></dt>
+        <dd>
+            <a asp-action="Edit" asp-route-id="@Model.Id"><span class="glyphicon glyphicon-edit"></span></a> |
+            <a asp-action="Delete" asp-route-id="@Model.Id"><span class="glyphicon glyphicon-trash"></span></a>
+        </dd>
     </dl>
 
 
