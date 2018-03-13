@@ -61,8 +61,7 @@ namespace PupPals.Controllers
         {
             ApplicationUser _user = await GetCurrentUserAsync();
 
-            OwnerCreateViewModel createOwner = new OwnerCreateViewModel(_context, _user);
-            return View(createOwner);
+            return View();
         }
 
         // POST: Owner/Create
@@ -70,20 +69,18 @@ namespace PupPals.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Owner owner)
+        public async Task<IActionResult> Create(Owner owner, int house)
         {
+            ModelState.Remove("HouseId");
             if (ModelState.IsValid)
             {
-                
+                owner.HouseId = house;
                 _context.Add(owner);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Details), "House", new { id = owner.HouseId }); ;
             }
-            ApplicationUser _user = await GetCurrentUserAsync();
 
-            OwnerCreateViewModel createOwner = new OwnerCreateViewModel(_context, _user);
-
-            return View(createOwner);
+            return View();
         }
 
 
