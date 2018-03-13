@@ -77,7 +77,7 @@ namespace PupPals.Controllers
                 
                 _context.Add(owner);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), "House", new { id = owner.HouseId }); ;
             }
             ApplicationUser _user = await GetCurrentUserAsync();
 
@@ -136,7 +136,7 @@ namespace PupPals.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), "House", new { id = owner.HouseId }); ;
             }
             //ViewData["HouseId"] = new SelectList(_context.House, "Id", "Address", owner.HouseId);
             return View(owner);
