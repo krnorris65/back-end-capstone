@@ -31,7 +31,9 @@ namespace PupPals.Controllers
         // GET: Owner
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Owner.Include(o => o.House);
+            ApplicationUser user = await GetCurrentUserAsync();
+            //only return owners that are of houses that the user added
+            var applicationDbContext = _context.Owner.Include(o => o.House).Where(o => o.House.User == user);
             return View(await applicationDbContext.ToListAsync());
         }
 
