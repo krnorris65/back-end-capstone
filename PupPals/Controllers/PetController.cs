@@ -56,15 +56,10 @@ namespace PupPals.Controllers
         }
 
         // GET: Pet/Create
-        public async Task<IActionResult> Create()
+        public IActionResult Create(int houseId)
         {
-            //gets the current user
-            ApplicationUser _user = await GetCurrentUserAsync();
-
-            //displays pet info and list of houses drop down
-            PetCreateViewModel petView = new PetCreateViewModel(_context, _user);
-
-            return View(petView);
+            Pet pet = new Pet { HouseId = houseId };
+            return View(pet);
         }
 
         // POST: Pet/Create

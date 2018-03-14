@@ -51,7 +51,7 @@
                     @Html.DisplayFor(modelItem => owner.FirstName) <text> </text> @Html.DisplayFor(modelI => owner.LastName) <br />
 
                 }
-                <a asp-controller="Owner" asp-action="Create">Add Contact</a>
+                <a asp-controller="Owner" asp-action="Create" asp-route-houseId="@item.Id">Add Owner</a>
             </td>
             <td>
                 @foreach (var pet in item.PetList)
@@ -67,7 +67,7 @@
 
                         }
                  }
-                <a asp-controller="Pet" asp-action="Create">Add Pet</a>
+                <a asp-controller="Pet" asp-action="Create" asp-route-houseId="@item.Id">Add Pet</a>
             </td>
             <td>
                 <a asp-action="Details" asp-route-id="@item.Id"><span class="	glyphicon glyphicon-info-sign"></span></a> |
