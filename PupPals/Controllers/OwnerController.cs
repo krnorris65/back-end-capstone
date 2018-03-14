@@ -74,7 +74,7 @@ namespace PupPals.Controllers
             {
                 _context.Add(owner);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Details), "House", new { id = owner.HouseId }); ;
+                return RedirectToAction(nameof(Details), "House", new { id = owner.HouseId });
             }
 
             return View();
@@ -163,7 +163,7 @@ namespace PupPals.Controllers
             var owner = await _context.Owner.SingleOrDefaultAsync(m => m.Id == id);
             _context.Owner.Remove(owner);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Details), "House", new { id = owner.HouseId });
         }
 
         private bool OwnerExists(int id)

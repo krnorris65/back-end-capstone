@@ -178,7 +178,7 @@ namespace PupPals.Controllers
             var pet = await _context.Pet.SingleOrDefaultAsync(m => m.Id == id);
             _context.Pet.Remove(pet);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Details), "House", new { id = pet.HouseId });
         }
 
         private bool PetExists(int id)
