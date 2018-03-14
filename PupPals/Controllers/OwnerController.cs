@@ -77,7 +77,7 @@ namespace PupPals.Controllers
                 return RedirectToAction(nameof(Details), "House", new { id = owner.HouseId });
             }
 
-            return View();
+            return View(owner);
         }
 
 

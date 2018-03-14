@@ -12,6 +12,12 @@
 
         <a asp-controller="House" asp-action="Create" class="btn btn-default">Add New Encounter</a>
     </div>
-
+    <hr />
+    <h3>Walking in a different neighborhood?</h3>
+    <button id="searchButton">Search Map</button>
+    <div id="searchInput">
+          <p>Type an address below and see the houses you've tracked in other parts of town</p>
+            <input id="pac-input" class="controls" type="text" placeholder="Search">
+    </div>
     <div id="map"></div>
 }

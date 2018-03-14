@@ -1,4 +1,5 @@
 ﻿//only runs function when on the landing page
+
 if (window.location.pathname == "/") {
 
     $(document).ready(function () {
@@ -24,40 +25,46 @@ if (window.location.pathname == "/") {
                     map: homeMap
                 });
             })
-        })
-    });
-}
+            
 
-//get geocode of address
-$(".houseCreate").click(evt => {
-    const address = $(".formAddress").val()
-    const city = $(".formCity").val()
-    const state = $(".formState").val()
-    const zip = $(".formZip").val()
-    //if the required fields are not null then do an ajax request to get geolocation before submitting form
-    if (address != "" && city != "" && state != "") {
-        //prevent form from sending before geolocation is captured
-        evt.preventDefault()
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
 
-        $.ajax({
-            method: "GET",
-            url: `https://maps.googleapis.com/maps/api/geocode/json?address=${address}+${city}+${state}+${zip}&key=${googleAPI.key}`
-        }).then(res => {
-            //if the results only return one result, set that as the geolocation
-            if (res.results.length == 1) {
-                //geolocation of the address entered
-                let geoLocation = res.results["0"].geometry.location
+        // Bias the SearchBox results towards current map's viewport.
+        homeMap.addListener('bounds_changed', function () {
+            searchBox.setBounds(homeMap.getBounds());
+        });
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function () {
+            var places = searchBox.getPlaces();
 
-                //assign to position input
-                let stringGeo = JSON.stringify(geoLocation)
-                $(".formPosition").val(stringGeo)
-
-                //submit form
-                $('form').submit()
-            } else {
-                //if the results have more than one result or no results alert the user of the address not being found
-                alert("Address not found")
+            if (places.length == 0) {
+                return;
             }
-        })
-    }
-})
+
+            // For each place, get the icon, name and location.
+            var bounds = new google.maps.LatLngBounds();
+            places.forEach(function (place) {
+                if (!place.geometry) {
+                    console.log("Returned place contains no geometry");
+                    return;
+                }
+
+
+                if (place.geometry.viewport) {
+                    // Only geocodes have viewport.
+                    bounds.union(place.geometry.viewport);
+                } else {
+                    bounds.extend(place.geometry.location);
+                }
+            });
+            homeMap.fitBounds(bounds);
+        });
+
+
+            })//end of .then
+    }); //end of doc.ready
+
+}//end of path
+

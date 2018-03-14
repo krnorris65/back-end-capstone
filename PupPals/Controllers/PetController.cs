@@ -78,15 +78,8 @@ namespace PupPals.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Details), "House", new { id = pet.HouseId});
             }
- 
 
-            //gets the current user
-            ApplicationUser _user = await GetCurrentUserAsync();
-
-            //displays pet info and list of houses drop down
-            PetCreateViewModel petView = new PetCreateViewModel(_context, _user);
-
-            return View(petView);
+            return View(pet);
         }
 
         // GET: Pet/Edit/5
