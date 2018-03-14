@@ -57,10 +57,10 @@ namespace PupPals.Controllers
         }
 
         // GET: Owner/Create
-        public IActionResult Create(int? house)
+        public IActionResult Create(int houseId)
         {
-
-            return View();
+            Owner owner = new Owner { HouseId = houseId };
+            return View(owner);
         }
 
         // POST: Owner/Create
@@ -68,9 +68,8 @@ namespace PupPals.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Owner owner, int house)
+        public async Task<IActionResult> Create(Owner owner)
         {
-            owner.HouseId = house;
             if (ModelState.IsValid)
             {
                 _context.Add(owner);
