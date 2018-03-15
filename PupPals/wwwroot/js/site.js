@@ -20,28 +20,48 @@ if (window.location.pathname == "/") {
                     center: JSON.parse(myHouse.position)
                 });
 
+                let icons = {
+                    false:  'https://maps.google.com/mapfiles/ms/micons/blue-dot.png',
+                    true: 'http://maps.google.com/mapfiles/ms/micons/red-dot.png',
+                    best: 'https://maps.google.com/mapfiles/ms/micons/ltblue-dot.png',
+                    myHouse: 'https://maps.google.com/mapfiles/ms/micons/purple-dot.png'
+                }
+
                 //creates markers and detail windows for all of the houses associated with that user
                 response.forEach(h => {
+                    let iconColor
+                    if (h.isResidence) {
+                        iconColor = icons["myHouse"]
+                    } else if (!h.avoid && h.petList.filter(p => p.bestFriend).length > 0) {
+                        iconColor = icons["best"]
+                    } else {
+                        iconColor = icons[h.avoid]
+                    }
+
                     let marker = new google.maps.Marker({
                         //position is stored as a string so it must be parsed
                         position: JSON.parse(h.position),
                         //put markers on map created above
-                        map: homeMap
+                        map: homeMap,
+                        icon: {
+                            url: iconColor
+                        }
                     });
+                    
 
                     //details when click on marker
-                    let markerContent = `<div class="markerDetails">`
+                    let markerContent = `<div class="markerDetails"><h4>`
 
                     //if the house is the user's residence, add the house icon before the address
                     if(h.isResidence) {
-                        markerContent += `<span class="glyphicon glyphicon-home"> </span>`
+                        markerContent += `<span class="glyphicon glyphicon-home"></span> `
                     }
                     //if the house is marked to avoid, add the avoid icon before the address
                     if (h.avoid) {
-                        markerContent += `<span class="glyphicon glyphicon-ban-circle" style="color:red"> </span>`
+                        markerContent += `<span class="glyphicon glyphicon-ban-circle" style="color:red"></span> `
                     }
 
-                    markerContent += `<h4 style="display:inline">${h.address}</h4><hr style="margin:5px 0px"/>`
+                    markerContent += `${h.address}</h4><hr style="margin:5px 0px"/>`
                     if (h.notes != null) {
                         markerContent += `<p>${h.notes}</p>`
                     }
@@ -71,7 +91,7 @@ if (window.location.pathname == "/") {
                         markerContent += `</ul>`
                     }
                     //brings user to house detail page for more information
-                    markerContent += `<a href="/House/Details/${h.id}"><p>More Info</p></a>
+                    markerContent += `<a href="/House/Details/${h.id}">More Info</a>
                         </div>`
 
                     //creates the info window for each marker
