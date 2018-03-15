@@ -9,16 +9,18 @@ if (window.location.pathname == "/") {
         }).then(response => {
             let myHouse = response.filter(h => h.isResidence === true)[0]
             console.log(myHouse)
-            //create map and center around the user's house
             let homeMap
+            let prev_infowindow
 
             function createMap() {
+                //create map and center around the user's house
                 homeMap = new google.maps.Map(document.getElementById('map'), {
                     zoom: 15,
                     //position is stored as a string so it must be parsed
                     center: JSON.parse(myHouse.position)
                 });
-                //creates markers for all of the houses associated with that user
+
+                //creates markers and detail windows for all of the houses associated with that user
                 response.forEach(h => {
                     let marker = new google.maps.Marker({
                         //position is stored as a string so it must be parsed
@@ -26,10 +28,74 @@ if (window.location.pathname == "/") {
                         //put markers on map created above
                         map: homeMap
                     });
+
+                    //details when click on marker
+                    let markerContent = `<div class="markerDetails">`
+
+                    //if the house is the user's residence, add the house icon before the address
+                    if(h.isResidence) {
+                        markerContent += `<span class="glyphicon glyphicon-home"> </span>`
+                    }
+                    //if the house is marked to avoid, add the avoid icon before the address
+                    if (h.avoid) {
+                        markerContent += `<span class="glyphicon glyphicon-ban-circle" style="color:red"> </span>`
+                    }
+
+                    markerContent += `<h4 style="display:inline">${h.address}</h4><hr style="margin:5px 0px"/>`
+                    if (h.notes != null) {
+                        markerContent += `<p>${h.notes}</p>`
+                    }
+                    if (h.ownerList.length > 0) {
+                        markerContent += `<p><b>Owners</b></p>
+                            <ul>`
+                        h.ownerList.forEach(o => {
+                            markerContent += `<li>${o.firstName} ${o.lastName}</li>`
+                        })
+                        markerContent += `</ul>`
+                    }
+                    if (h.petList.length > 0) {
+                        markerContent += `<p><b>Pets</b></p>
+                            <ul>`
+                        h.petList.forEach(p => {
+                            markerContent += `<li>`
+                            if (p.name != null){
+                                markerContent += `${p.name} (${p.type})`
+                            } else {
+                                markerContent += `${p.type}`
+                            }
+                            if (p.bestFriend) {
+                                markerContent += `<span class="glyphicon glyphicon-star" style="color:darkgoldenrod"></span>`
+                            }
+                            markerContent += `</li>`
+                        })
+                        markerContent += `</ul>`
+                    }
+                    //brings user to house detail page for more information
+                    markerContent += `<a href="/House/Details/${h.id}"><p>More Info</p></a>
+                        </div>`
+
+                    //creates the info window for each marker
+                    var infowindow = new google.maps.InfoWindow({
+                        content: markerContent
+                    });
+
+                    //event listener for click on marker
+                    marker.addListener('click', function () {
+                        //if a detail window is open, close it before opening a new one
+                        if (prev_infowindow) {
+                            prev_infowindow.close();
+                        }
+                        //set prev_infowindow as the current detail window open
+                        prev_infowindow = infowindow;
+                        //open the detail window
+                        infowindow.open(homeMap, marker);
+                    });
                 })
             }
+            //invoke function to create the map
             createMap();
 
+            //allows users to search different parts of the map
             var input = document.getElementById('pac-input');
             var searchBox = new google.maps.places.SearchBox(input);
 
@@ -65,9 +131,14 @@ if (window.location.pathname == "/") {
                 homeMap.fitBounds(bounds);
             });
 
+            //resets map to original view (focused around user's neighborhood)
             $("#myNeighborhood").click(m => {
                 createMap();
             })
+
+
+
+            
 
         })//end of .then
     }); //end of doc.ready

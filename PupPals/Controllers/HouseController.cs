@@ -178,7 +178,8 @@ namespace PupPals.Controllers
         {
             //only lists houses that the current user has added to the system
             ApplicationUser user = await GetCurrentUserAsync();
-            var userHouses = _context.House.Where(h => h.User == user);
+            //var userHouses = _context.House.Where(h => h.User == user);
+            var userHouses = _context.House.Include(h => h.PetList).Include(h => h.OwnerList).Where(h => h.User == user);
             return Json(userHouses);
         }
     }
