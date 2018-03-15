@@ -47,6 +47,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th>Photo</th>
             <th>Pet</th>
             <th>Description</th>
             <th>Notes</th>
@@ -57,23 +58,26 @@
     @foreach (var item in Model.PetList)
     {
         <tr>
+            <td>
+                <img src="~/@Html.DisplayFor(model => item.Photo)" width="50" height="50">
+            </td>
             @if (item.Name != null)
-            {
-                <td>
-                    @if (item.BestFriend)
-                    {
-                        <span class="glyphicon glyphicon-star" style="color:darkgoldenrod"></span>
-                    }
-                    @Html.DisplayFor(modelItem => item.Name) (@Html.DisplayFor(modelItem => item.Type))
-                </td>
-            }
-            else
-            {
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type)
-                </td>
+    {
+        <td>
+            @if (item.BestFriend)
+    {
+        <span class="glyphicon glyphicon-star" style="color:darkgoldenrod"></span>
+}
+            @Html.DisplayFor(modelItem => item.Name) (@Html.DisplayFor(modelItem => item.Type))
+        </td>
+}
+else
+{
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
 
-            }
+}
 
             <td>
                 @Html.DisplayFor(modelItem => item.Description)

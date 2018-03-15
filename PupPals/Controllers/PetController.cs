@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -16,11 +19,13 @@ namespace PupPals.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
-        public PetController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public PetController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
             _userManager = userManager;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         // This task retrieves the currently authenticated user
@@ -67,13 +72,35 @@ namespace PupPals.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Pet pet)
+        public async Task<IActionResult> Create(Pet pet, IFormFile file)
         {
+
             ModelState.Remove("User");
             if (ModelState.IsValid)
             {
                 ApplicationUser user = await GetCurrentUserAsync();
                 pet.User = user;
+
+
+                //specify the filepath
+                var upload = Path.Combine(_hostingEnvironment.WebRootPath, "images");
+
+                //store the relative filepath in the database for use as the src of img in view
+                pet.Photo = Path.Combine(
+                    "images/",
+                    file.FileName
+                );
+
+                if (file.Length > 0)
+                {
+                    var filePath = Path.Combine(upload, file.FileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                }
+
+
                 _context.Add(pet);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Details), "House", new { id = pet.HouseId});
