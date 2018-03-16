@@ -20,19 +20,22 @@
         @foreach (var item in Model.MyPets)
         {
         <tr>
-            @if (item.Name != null)
-            {
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name) (@Html.DisplayFor(modelItem => item.Type))
-                </td>
-            }
-            else
-            {
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type)
-                </td>
+            <td>
+                @if(item.Photo != null){
+                    <img src="~/@Html.DisplayFor(model => item.Photo)" width="200"> <br />
+                }
+                @if (item.Name != null)
+                {
+                    <p>@Html.DisplayFor(modelItem => item.Name) (@Html.DisplayFor(modelItem => item.Type))</p>
+                }
+                else
+                {
 
-            }
+                    @Html.DisplayFor(modelItem => item.Type)
+
+                }
+            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
@@ -76,18 +79,21 @@
         @foreach (var item in Model.BestFriends)
         {
         <tr>
-            @if (item.Name != null)
-            {
             <td>
-                @Html.DisplayFor(modelItem => item.Name) (@Html.DisplayFor(modelItem => item.Type))
-            </td>
-            } else
-            {
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type)
-                </td>
+                @if(item.Photo != null){
+                    <img src="~/@Html.DisplayFor(model => item.Photo)" width="200"> <br />
+                }
+                @if (item.Name != null)
+                {
+                    <p>@Html.DisplayFor(modelItem => item.Name) (@Html.DisplayFor(modelItem => item.Type))</p>
+                }
+                else
+                {
 
-            }
+                    @Html.DisplayFor(modelItem => item.Type)
+
+                }
+            </td>
 
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
