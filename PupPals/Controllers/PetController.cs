@@ -224,14 +224,17 @@ namespace PupPals.Controllers
             //create the folder if it does not already exist
             CreateFolder(upload);
 
-            string petId = "pet" + pet.Id;
-
-            IEnumerable<string> folderFiles = Directory.EnumerateFiles(upload, petId + "*.*");
-            if (folderFiles.Count() != 0)
+            if(pet.Photo != null)
             {
-                string currentPhoto = Directory.GetFiles(upload, petId + "*.*")[0];
-                System.IO.File.Delete(currentPhoto);
+                DeletePhoto(pet.Photo);
             }
+            //string petId = "pet" + pet.Id;
+            //IEnumerable<string> folderFiles = Directory.EnumerateFiles(upload, petId + "*.*");
+            //if (folderFiles.Count() != 0)
+            //{
+            //    string currentPhoto = Directory.GetFiles(upload, petId + "*.*")[0];
+            //    System.IO.File.Delete(currentPhoto);
+            //}
 
 
             //store the relative filepath (images/house{HouseId}/pet{PetId}-{fileName})
@@ -248,6 +251,12 @@ namespace PupPals.Controllers
                 await file.CopyToAsync(stream);
             }
 
+        }
+
+        private void DeletePhoto(string petPhoto)
+        {
+            string currentPhoto = Directory.GetFiles(_hostingEnvironment.WebRootPath, petPhoto)[0];
+            System.IO.File.Delete(currentPhoto);
         }
     }
 }
