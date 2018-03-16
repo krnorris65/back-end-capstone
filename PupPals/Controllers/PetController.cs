@@ -201,7 +201,7 @@ namespace PupPals.Controllers
             return _context.Pet.Any(e => e.Id == id);
         }
 
-        private bool CreateDirectory(string folderPath)
+        private bool CreateFolder(string folderPath)
         {
 
             // Determine whether the directory exists.
@@ -222,7 +222,17 @@ namespace PupPals.Controllers
             //specify the filepath (images/house{HouseId})
             var upload = Path.Combine(_hostingEnvironment.WebRootPath, "images", "house" + pet.HouseId.ToString());
             //create the folder if it does not already exist
-            CreateDirectory(upload);
+            CreateFolder(upload);
+
+            string petId = "pet" + pet.Id;
+
+            IEnumerable<string> folderFiles = Directory.EnumerateFiles(upload, petId + "*.*");
+            if (folderFiles.Count() != 0)
+            {
+                string currentPhoto = Directory.GetFiles(upload, petId + "*.*")[0];
+                System.IO.File.Delete(currentPhoto);
+            }
+
 
             //store the relative filepath (images/house{HouseId}/pet{PetId}-{fileName})
             pet.Photo = Path.Combine(
