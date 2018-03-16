@@ -81,22 +81,26 @@ namespace PupPals.Controllers
                 ApplicationUser user = await GetCurrentUserAsync();
                 pet.User = user;
 
-
-                //specify the filepath
-                var upload = Path.Combine(_hostingEnvironment.WebRootPath, "images");
-
-                //store the relative filepath in the database for use as the src of img in view
-                pet.Photo = Path.Combine(
-                    "images/",
-                    file.FileName
-                );
-
-                if (file.Length > 0)
+                //if photo was added, upload it and add it to the pet
+                if(file != null)
                 {
-                    var filePath = Path.Combine(upload, file.FileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+
+                    //specify the filepath
+                    var upload = Path.Combine(_hostingEnvironment.WebRootPath, "images");
+
+                    //store the relative filepath in the database for use as the src of img in view
+                    pet.Photo = Path.Combine(
+                        "images/",
+                        file.FileName
+                    );
+
+                    if (file.Length > 0)
                     {
-                        await file.CopyToAsync(stream);
+                        var filePath = Path.Combine(upload, file.FileName);
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
                     }
                 }
 
@@ -137,7 +141,7 @@ namespace PupPals.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Pet pet)
+        public async Task<IActionResult> Edit(int id, Pet pet, IFormFile file)
         {
             if (id != pet.Id)
             {
@@ -151,6 +155,29 @@ namespace PupPals.Controllers
                 {
                     ApplicationUser user = await GetCurrentUserAsync();
                     pet.User = user;
+
+                    //if photo was added, upload it and add it to the pet
+                    if (file != null)
+                    {
+
+                        //specify the filepath
+                        var upload = Path.Combine(_hostingEnvironment.WebRootPath, "images");
+
+                        //store the relative filepath in the database for use as the src of img in view
+                        pet.Photo = Path.Combine(
+                            "images/",
+                            file.FileName
+                        );
+
+                        if (file.Length > 0)
+                        {
+                            var filePath = Path.Combine(upload, file.FileName);
+                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            {
+                                await file.CopyToAsync(stream);
+                            }
+                        }
+                    }
                     _context.Update(pet);
                     await _context.SaveChangesAsync();
                 }

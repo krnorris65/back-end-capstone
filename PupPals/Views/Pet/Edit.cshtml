@@ -10,12 +10,12 @@
 <h6>*Indicates Required Field</h6>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <div class="checkbox">
                     <label>
-                        <input asp-for="MyPet"/> This is my pet!
+                        <input asp-for="MyPet" /> This is my pet!
                     </label>
                 </div>
             </div>
@@ -39,14 +39,14 @@
                 <div>
                     <label class="control-label">Lives at*:</label>
                     @Html.DropDownList(
-                      "HouseId",
-                       @Model.HouseList,
-                      new
-                      {
-                          @selected = @Model.House.Id,
-                          @class = "form-control"
-                      }
-                      )
+                "HouseId",
+                 @Model.HouseList,
+                new
+                {
+                    @selected = @Model.House.Id,
+                    @class = "form-control"
+                }
+                )
                     <span asp-validation-for="@Model.House.Id" class="text-danger"></span>
                 </div>
             </div>
@@ -54,7 +54,7 @@
             <div class="form-group">
                 <div class="checkbox">
                     <label>
-                        <input asp-for="BestFriend"/> My Pet's Best Friend
+                        <input asp-for="BestFriend" /> My Pet's Best Friend
                     </label>
                 </div>
             </div>
@@ -62,6 +62,22 @@
                 <label asp-for="Notes" class="control-label"></label>
                 <textarea asp-for="Notes" class="form-control"></textarea>
                 <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <div>
+                   @if (@Model.Photo != null)
+                    {
+                        <img src="~/@Model.Photo" width="200"> <br />
+                        <label class="control-label">Change photo:</label>
+                   }
+                   else
+                   {
+                        <label class="control-label">Add photo:</label>
+                   }
+                    <input type="file" name="file" />
+                    <input type="hidden" asp-for="Photo" />
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
