@@ -43,27 +43,6 @@ namespace PupPals.Controllers
             return View(petList);
         }
 
-        // GET: Pet/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            ApplicationUser _user = await GetCurrentUserAsync();
-
-            var pet = await _context.Pet
-                .Include(p => p.House)
-                .Where(p => p.User == _user)
-                .SingleOrDefaultAsync(m => m.Id == id);
-            if (pet == null)
-            {
-                return NotFound();
-            }
-
-            return View(pet);
-        }
-
         // GET: Pet/Create
         public IActionResult Create(int houseId)
         {
@@ -96,7 +75,7 @@ namespace PupPals.Controllers
                     await _context.SaveChangesAsync();
                 }
 
-                return RedirectToAction(nameof(Details), "House", new { id = pet.HouseId});
+                return RedirectToAction("Details", "House", new { id = pet.HouseId});
             }
 
             return View(pet);
@@ -167,7 +146,7 @@ namespace PupPals.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Details), "House", new { id = pet.HouseId });
+                return RedirectToAction("Details", "House", new { id = pet.HouseId });
             }
             return View(pet);
         }
@@ -208,7 +187,7 @@ namespace PupPals.Controllers
 
             _context.Pet.Remove(pet);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Details), "House", new { id = pet.HouseId });
+            return RedirectToAction("Details", "House", new { id = pet.HouseId });
         }
 
         private bool PetExists(int id)
