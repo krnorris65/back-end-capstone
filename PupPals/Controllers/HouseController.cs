@@ -46,7 +46,9 @@ namespace PupPals.Controllers
                 return NotFound();
             }
 
-            var house = await _context.House.Include(h => h.PetList).Include(h => h.OwnerList)
+            ApplicationUser user = await GetCurrentUserAsync();
+
+            var house = await _context.House.Include(h => h.PetList).Include(h => h.OwnerList).Where(h => h.User == user)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
             if (house == null)
@@ -54,7 +56,6 @@ namespace PupPals.Controllers
                 return NotFound();
             }
 
-            ApplicationUser user = await GetCurrentUserAsync();
 
             return View(house);
         }
@@ -91,8 +92,9 @@ namespace PupPals.Controllers
             {
                 return NotFound();
             }
+            ApplicationUser user = await GetCurrentUserAsync();
 
-            var house = await _context.House.SingleOrDefaultAsync(m => m.Id == id);
+            var house = await _context.House.Where(h => h.User == user).SingleOrDefaultAsync(m => m.Id == id);
             if (house == null)
             {
                 return NotFound();
@@ -146,9 +148,9 @@ namespace PupPals.Controllers
             {
                 return NotFound();
             }
-
+            ApplicationUser user = await GetCurrentUserAsync();
             var house = await _context.House
-                .SingleOrDefaultAsync(m => m.Id == id);
+                .Where(h => h.User == user).SingleOrDefaultAsync(m => m.Id == id);
             if (house == null)
             {
                 return NotFound();

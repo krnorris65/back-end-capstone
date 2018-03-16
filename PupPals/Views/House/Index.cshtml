@@ -39,7 +39,9 @@
                 }
 
                 @Html.DisplayFor(modelItem => item.Address)<br />
-                @Html.DisplayFor(modelItem => item.City), @Html.DisplayFor(modelItem => item.State) @Html.DisplayFor(modelItem => item.ZipCode)
+                @Html.DisplayFor(modelItem => item.City), @Html.DisplayFor(modelItem => item.State) @Html.DisplayFor(modelItem => item.ZipCode)<br />
+                <a asp-action="Details" asp-route-id="@item.Id">More Info</a>
+
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Notes)
@@ -70,7 +72,6 @@
                 <a asp-controller="Pet" asp-action="Create" asp-route-houseId="@item.Id">Add Pet</a>
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.Id"><span class="	glyphicon glyphicon-info-sign"></span></a> |
                 <a asp-action="Delete" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash"></span></a>
             </td>
 

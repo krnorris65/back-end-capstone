@@ -5,9 +5,9 @@
     ViewData["Title"] = "Landing Page";
 }
 
-<h2>Welcome to Pup Pals</h2>
 @if (SignInManager.IsSignedIn(User))
 {
+    <h2>Welcome to Pup Pals</h2>
     <div>
 
         <a asp-controller="House" asp-action="Create" class="btn btn-default">Add New Encounter</a>

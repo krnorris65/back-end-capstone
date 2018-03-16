@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +13,7 @@ using PupPals.Models.OwnerViewModels;
 
 namespace PupPals.Controllers
 {
+    [Authorize]
     public class OwnerController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -44,9 +46,11 @@ namespace PupPals.Controllers
             {
                 return NotFound();
             }
+            ApplicationUser user = await GetCurrentUserAsync();
 
             var owner = await _context.Owner
                 .Include(o => o.House)
+                .Where(o => o.House.User == user)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (owner == null)
             {
@@ -88,13 +92,16 @@ namespace PupPals.Controllers
             {
                 return NotFound();
             }
+            ApplicationUser _user = await GetCurrentUserAsync();
 
-            var owner = await _context.Owner.SingleOrDefaultAsync(m => m.Id == id);
+            var owner = await _context.Owner
+                .Include(o => o.House)
+                .Where(o => o.House.User == _user)
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (owner == null)
             {
                 return NotFound();
             }
-            ApplicationUser _user = await GetCurrentUserAsync();
 
             OwnerEditViewModel editOwner = new OwnerEditViewModel(_context, _user, owner);
             return View(editOwner);
@@ -144,8 +151,11 @@ namespace PupPals.Controllers
                 return NotFound();
             }
 
+            ApplicationUser _user = await GetCurrentUserAsync();
+
             var owner = await _context.Owner
                 .Include(o => o.House)
+                .Where(o => o.House.User == _user)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (owner == null)
             {

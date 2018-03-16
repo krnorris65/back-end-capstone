@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -15,6 +16,7 @@ using PupPals.Models.PetViewModels;
 
 namespace PupPals.Controllers
 {
+    [Authorize]
     public class PetController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -48,9 +50,11 @@ namespace PupPals.Controllers
             {
                 return NotFound();
             }
+            ApplicationUser _user = await GetCurrentUserAsync();
 
             var pet = await _context.Pet
                 .Include(p => p.House)
+                .Where(p => p.User == _user)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (pet == null)
             {
@@ -106,14 +110,16 @@ namespace PupPals.Controllers
                 return NotFound();
             }
 
-            var _pet = await _context.Pet.SingleOrDefaultAsync(m => m.Id == id);
+            //gets the current user
+            ApplicationUser _user = await GetCurrentUserAsync();
+
+            var _pet = await _context.Pet.Where(p => p.User == _user).SingleOrDefaultAsync(m => m.Id == id);
             if (_pet == null)
             {
                 return NotFound();
             }
 
-            //gets the current user
-            ApplicationUser _user = await GetCurrentUserAsync();
+
 
             //displays pet info and list of houses in a drop down
             PetEditViewModel petEditView = new PetEditViewModel(_context, _user, _pet);
@@ -173,9 +179,12 @@ namespace PupPals.Controllers
             {
                 return NotFound();
             }
+            //gets the current user
+            ApplicationUser _user = await GetCurrentUserAsync();
 
             var pet = await _context.Pet
                 .Include(p => p.House)
+                .Where(p => p.User == _user)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (pet == null)
             {
