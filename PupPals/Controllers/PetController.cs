@@ -191,6 +191,12 @@ namespace PupPals.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var pet = await _context.Pet.SingleOrDefaultAsync(m => m.Id == id);
+
+            if (pet.Photo != null)
+            {
+                DeletePhoto(pet.Photo);
+            }
+
             _context.Pet.Remove(pet);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Details), "House", new { id = pet.HouseId });
@@ -228,14 +234,6 @@ namespace PupPals.Controllers
             {
                 DeletePhoto(pet.Photo);
             }
-            //string petId = "pet" + pet.Id;
-            //IEnumerable<string> folderFiles = Directory.EnumerateFiles(upload, petId + "*.*");
-            //if (folderFiles.Count() != 0)
-            //{
-            //    string currentPhoto = Directory.GetFiles(upload, petId + "*.*")[0];
-            //    System.IO.File.Delete(currentPhoto);
-            //}
-
 
             //store the relative filepath (images/house{HouseId}/pet{PetId}-{fileName})
             pet.Photo = Path.Combine(
