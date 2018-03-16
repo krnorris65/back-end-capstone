@@ -81,32 +81,17 @@ namespace PupPals.Controllers
                 ApplicationUser user = await GetCurrentUserAsync();
                 pet.User = user;
 
-                //if photo was added, upload it and add it to the pet
-                if(file != null)
-                {
-
-                    //specify the filepath
-                    var upload = Path.Combine(_hostingEnvironment.WebRootPath, "images");
-
-                    //store the relative filepath in the database for use as the src of img in view
-                    pet.Photo = Path.Combine(
-                        "images/",
-                        file.FileName
-                    );
-
-                    if (file.Length > 0)
-                    {
-                        var filePath = Path.Combine(upload, file.FileName);
-                        using (var stream = new FileStream(filePath, FileMode.Create))
-                        {
-                            await file.CopyToAsync(stream);
-                        }
-                    }
-                }
-
-
                 _context.Add(pet);
                 await _context.SaveChangesAsync();
+
+                //if photo was added, upload it and add it to the pet
+                if (file != null)
+                {
+                    AddPhoto(pet, file);
+                    _context.Update(pet);
+                    await _context.SaveChangesAsync();
+                }
+
                 return RedirectToAction(nameof(Details), "House", new { id = pet.HouseId});
             }
 
@@ -216,11 +201,6 @@ namespace PupPals.Controllers
             return _context.Pet.Any(e => e.Id == id);
         }
 
-        private bool PhotoExists(string photoPath)
-        {
-            return _context.Pet.Any(p => p.Photo == photoPath);
-        }
-
         private bool CreateDirectory(string folderPath)
         {
 
@@ -239,29 +219,18 @@ namespace PupPals.Controllers
 
         private async void AddPhoto(Pet pet, IFormFile file)
         {
-            //specify the filepath
-            var upload = Path.Combine(_hostingEnvironment.WebRootPath, "images", pet.HouseId.ToString());
+            //specify the filepath (images/house{HouseId})
+            var upload = Path.Combine(_hostingEnvironment.WebRootPath, "images", "house" + pet.HouseId.ToString());
             //create the folder if it does not already exist
             CreateDirectory(upload);
 
-            //store the relative filepath in the database for use as the src of img in view
+            //store the relative filepath (images/house{HouseId}/pet{PetId}{fileName})
             pet.Photo = Path.Combine(
                 "images/",
-                pet.HouseId.ToString(),
-                file.FileName
+                "house" + pet.HouseId.ToString(),
+                "pet" + pet.Id + file.FileName
             );
-            var filePath = Path.Combine(upload, file.FileName);
-
-            if (PhotoExists(pet.Photo))
-            {
-                pet.Photo = Path.Combine(
-                    "images/",
-                    pet.HouseId.ToString(),
-                    1 + file.FileName
-                );
-                filePath = Path.Combine(upload, 1 + file.FileName);
-
-            }
+            var filePath = Path.Combine(upload, "pet" + pet.Id + file.FileName);
 
             //upload image
             using (var stream = new FileStream(filePath, FileMode.Create))
