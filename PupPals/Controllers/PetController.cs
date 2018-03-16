@@ -224,13 +224,13 @@ namespace PupPals.Controllers
             //create the folder if it does not already exist
             CreateDirectory(upload);
 
-            //store the relative filepath (images/house{HouseId}/pet{PetId}{fileName})
+            //store the relative filepath (images/house{HouseId}/pet{PetId}-{fileName})
             pet.Photo = Path.Combine(
                 "images/",
                 "house" + pet.HouseId.ToString(),
-                "pet" + pet.Id + file.FileName
+                "pet" + pet.Id + "-" + file.FileName
             );
-            var filePath = Path.Combine(upload, "pet" + pet.Id + file.FileName);
+            var filePath = Path.Combine(upload, "pet" + pet.Id + "-" + file.FileName);
 
             //upload image
             using (var stream = new FileStream(filePath, FileMode.Create))
