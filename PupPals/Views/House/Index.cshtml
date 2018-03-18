@@ -71,9 +71,12 @@
                  }
                 <a asp-controller="Pet" asp-action="Create" asp-route-houseId="@item.Id">Add Pet</a>
             </td>
-            <td>
-                <a asp-action="Delete" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash"></span></a>
-            </td>
+            @if (!item.IsResidence)
+            {
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+            }
 
             </tr>
 

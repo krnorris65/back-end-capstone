@@ -10,12 +10,14 @@
     <h2>Welcome to Pup Pals</h2>
     <div>
 
-        <a asp-controller="House" asp-action="Create" class="btn btn-default">Add New Encounter</a>
+        <a asp-controller="House" asp-action="Create" class="btn btn-default">Add House to Map</a>
     </div>
     <hr />
     <div id="map"></div>
-    <button id="myNeighborhood">Reset Map to My Neighborhood</button>
-    <h4>Walking in a different neighborhood?</h4>
-          <p>Type an address below and see the houses you've tracked in other parts of town</p>
-            <input id="pac-input" class="controls" type="text" placeholder="Search">
+    <h4>Walking in a different neighborhood?</h4> <button id="mapButton">Search Map</button>
+    <div id="mapInput">
+        <p>Type an address below and see the houses you've tracked in other parts of town</p>
+        <input id="pac-input" class="controls" type="text" placeholder="Search">
+        <button id="myNeighborhood">Go to My Neighborhood</button>
+    </div>
 }
