@@ -115,6 +115,7 @@ if (window.location.pathname == "/") {
             //invoke function to create the map
             createMap();
 
+
             //allows users to search different parts of the map
             var input = document.getElementById('pac-input');
             var searchBox = new google.maps.places.SearchBox(input);
@@ -150,6 +151,14 @@ if (window.location.pathname == "/") {
                 });
                 homeMap.fitBounds(bounds);
             });
+
+            //listens for click on search map button
+            $("#mapButton").click(b => {
+                $("#mapInput").html(
+                    `<p>Type an address below and see the houses you've tracked in other parts of town</p>
+                    <input id="pac-input" class="controls" type="text" placeholder="Search">
+                        <button id="myNeighborhood">Go to My Neighborhood</button>`)
+            })
 
             //resets map to original view (focused around user's neighborhood)
             $("#myNeighborhood").click(m => {
