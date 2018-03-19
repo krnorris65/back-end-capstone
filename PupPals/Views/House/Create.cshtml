@@ -3,59 +3,60 @@
 @{
     ViewData["Title"] = "New House";
 }
-
-<h4>Add New House</h4>
-<hr />
-<h6>*Indicates Required Field</h6>
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label class="control-label">Address*</label>
-                <input asp-for="Address" class=" formAddress form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">City*</label>
-                <input asp-for="City" class="formCity form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">State*</label>
-                <input asp-for="State" class="formState form-control" placeholder="2 letter abbreviation" />
-                <span asp-validation-for="State" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Zip Code</label>
-                <input asp-for="ZipCode" class="formZip form-control" />
-                <span asp-validation-for="ZipCode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="Avoid" /> Avoid this house during walks
-                    </label>
+<div class="createForm">
+    <h4>Add New House</h4>
+    <hr />
+    <h6>*Indicates Required Field</h6>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="control-label">Address*</label>
+                    <input asp-for="Address" class=" formAddress form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
                 </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="Notes" class="control-label"></label>
-                <textarea asp-for="Notes" class="form-control"></textarea>
-                <span asp-validation-for="Notes" class="text-danger"></span>
-            </div>
-            <input asp-for="Position" type="hidden" class="formPosition"/>
-            <div class="form-group">
-                <input type="submit" value="Create" class="houseCreate btn btn-default" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <label class="control-label">City*</label>
+                    <input asp-for="City" class="formCity form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">State*</label>
+                    <input asp-for="State" class="formState form-control" placeholder="2 letter abbreviation" />
+                    <span asp-validation-for="State" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Zip Code</label>
+                    <input asp-for="ZipCode" class="formZip form-control" />
+                    <span asp-validation-for="ZipCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input asp-for="Avoid" /> Avoid this house during walks
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Notes" class="control-label"></label>
+                    <textarea asp-for="Notes" class="form-control"></textarea>
+                    <span asp-validation-for="Notes" class="text-danger"></span>
+                </div>
+                <input asp-for="Position" type="hidden" class="formPosition"/>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="houseCreate btn btn-default" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-controller="Home" asp-action="Index">Go to Map</a>
+    <div>
+        <a asp-controller="Home" asp-action="Index">Go to Map</a>
+        </div>
+    <div>
+        <a asp-controller="House" asp-action="Index">Go to House List</a>
     </div>
-<div>
-    <a asp-controller="House" asp-action="Index">Go to House List</a>
 </div>
 
 @section Scripts {

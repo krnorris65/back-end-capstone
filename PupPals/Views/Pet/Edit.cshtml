@@ -4,92 +4,92 @@
     ViewData["Title"] = "Update Pet";
 }
 
-
-<h4>Update Pet Information</h4>
-<hr />
-<h6>*Indicates Required Field</h6>
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="MyPet" /> This is my pet!
-                    </label>
+<div class="editForm">
+    <h4>Update Pet Information</h4>
+    <hr />
+    <h6>*Indicates Required Field</h6>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input asp-for="MyPet" /> This is my pet!
+                        </label>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Type" class="control-label">Type of Animal*</label>
-                <input asp-for="Type" class="form-control" placeholder="ex. dog, cat, etc." />
-                <span asp-validation-for="Type" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label">Description of Animal*</label>
-                <textarea asp-for="Description" class="form-control" placeholder="ex. breed, color, size, notable features"></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <div>
-                    <label class="control-label">Lives at*:</label>
-                    @Html.DropDownList(
-                "HouseId",
-                 @Model.HouseList,
-                new
-                {
-                    @selected = @Model.House.Id,
-                    @class = "form-control"
-                }
-                )
-                    <span asp-validation-for="@Model.House.Id" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="BestFriend" /> My Pet's Best Friend
-                    </label>
+                <div class="form-group">
+                    <label asp-for="Type" class="control-label">Type of Animal*</label>
+                    <input asp-for="Type" class="form-control" placeholder="ex. dog, cat, etc." />
+                    <span asp-validation-for="Type" class="text-danger"></span>
                 </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="Notes" class="control-label"></label>
-                <textarea asp-for="Notes" class="form-control"></textarea>
-                <span asp-validation-for="Notes" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label">Description of Animal*</label>
+                    <textarea asp-for="Description" class="form-control" placeholder="ex. breed, color, size, notable features"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <div>
-                   @if (@Model.Photo != null)
+                <div class="form-group">
+                    <div>
+                        <label class="control-label">Lives at*:</label>
+                        @Html.DropDownList(
+                    "HouseId",
+                    @Model.HouseList,
+                    new
                     {
-                        <img src="~/@Model.Photo" width="200"> <br />
-                        <label class="control-label">Change photo:</label>
-                   }
-                   else
-                   {
-                        <label class="control-label">Add photo:</label>
-                   }
-                    <input type="file" name="file" />
-                    <input type="hidden" asp-for="Photo" />
+                        @selected = @Model.House.Id,
+                        @class = "form-control"
+                    }
+                    )
+                        <span asp-validation-for="@Model.House.Id" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
+
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input asp-for="BestFriend" /> My Pet's Best Friend
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Notes" class="control-label"></label>
+                    <textarea asp-for="Notes" class="form-control"></textarea>
+                    <span asp-validation-for="Notes" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <div>
+                    @if (@Model.Photo != null)
+                        {
+                            <img src="~/@Model.Photo" width="200"> <br />
+                            <label class="control-label">Change photo:</label>
+                    }
+                    else
+                    {
+                            <label class="control-label">Add photo:</label>
+                    }
+                        <input type="file" name="file" />
+                        <input type="hidden" asp-for="Photo" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-controller="House" asp-action="Details" asp-route-id="@Model.House.Id">Back</a>
     </div>
 </div>
-
-<div>
-    <a asp-controller="House" asp-action="Details" asp-route-id="@Model.House.Id">Back</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

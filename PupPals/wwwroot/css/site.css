@@ -23,10 +23,10 @@ table{
     background-color: rgb(230, 255, 255, .85);
 }
 
-.deleteForm{
+.deleteForm, .createForm, .editForm{
     color: black;
     background-color: #008080cc;
-    display: inline-block;
+    /* display: inline-block; */
 }
 
 #diffNeighborhood{
