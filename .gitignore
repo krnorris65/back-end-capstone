@@ -10,7 +10,7 @@
 *.sln.docstates
 appsettings.json
 *.db
-wwwroot/images/house*
+PupPals/wwwroot/images/house*
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
