@@ -90,6 +90,7 @@ table, .deleteForm, .createForm, .editForm, .houseDetails{
 }
 
 
+
 #infowindow-content .title {
     font-weight: bold;
 }
@@ -151,4 +152,3 @@ table, .deleteForm, .createForm, .editForm, .houseDetails{
     font-weight: 500;
     padding: 6px 12px;
 }
-

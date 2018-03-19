@@ -12,6 +12,14 @@ if (window.location.pathname == "/") {
             let homeMap
             let prev_infowindow
 
+            let icons = {
+                false:  'https://maps.google.com/mapfiles/ms/micons/blue-dot.png',
+                true: 'http://maps.google.com/mapfiles/ms/micons/red-dot.png',
+                best: 'https://maps.google.com/mapfiles/ms/micons/ltblue-dot.png',
+                myHouse: 'https://maps.google.com/mapfiles/ms/micons/purple-dot.png',
+                search:'https://maps.google.com/mapfiles/kml/pal4/icon57.png'
+            }
+
             function createMap() {
                 //create map and center around the user's house
                 homeMap = new google.maps.Map(document.getElementById('map'), {
@@ -19,13 +27,6 @@ if (window.location.pathname == "/") {
                     //position is stored as a string so it must be parsed
                     center: JSON.parse(myHouse.position)
                 });
-
-                let icons = {
-                    false:  'https://maps.google.com/mapfiles/ms/micons/blue-dot.png',
-                    true: 'http://maps.google.com/mapfiles/ms/micons/red-dot.png',
-                    best: 'https://maps.google.com/mapfiles/ms/micons/ltblue-dot.png',
-                    myHouse: 'https://maps.google.com/mapfiles/ms/micons/purple-dot.png'
-                }
 
                 //creates markers and detail windows for all of the houses associated with that user
                 response.forEach(h => {
@@ -141,6 +142,13 @@ if (window.location.pathname == "/") {
                         return;
                     }
 
+                    let newMarker = new google.maps.Marker({
+                        map: homeMap,
+                        icon: icons["search"],
+                        position: place.geometry.location
+                    })
+
+                    console.log(newMarker)
 
                     if (place.geometry.viewport) {
                         // Only geocodes have viewport.
