@@ -1,7 +1,17 @@
 ﻿body {
+    background-color: #008080;
     padding-top: 50px;
     padding-bottom: 20px;
     background-image: url("../images/tealPawPrint.jpg");
+}
+
+#diffNeighborhood{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#diffNeighborhood > h4 {
+    display:inline;
 }
 
 /* Wrapping element */
