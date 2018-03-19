@@ -4,6 +4,12 @@
     padding-bottom: 20px;
     background-image: url("../images/tealPawPrint.jpg");
 }
+nav{
+    background-color: #e6ffff;
+}
+table{
+    background-color: rgb(230, 255, 255, .93);
+}
 
 #diffNeighborhood{
     margin-top: 20px;
