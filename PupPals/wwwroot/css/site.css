@@ -12,22 +12,38 @@ nav{
 }
 nav a{
     color: #008080;
+    font-weight: initial;
 }
-h2{
+.houseDetails a{
+    color: rgb(230, 255, 255)
+}
+a{
+    color: #004d4d;
+    font-weight: bold;
+}
+a:hover{
+    color: #000066;
+}
+h2, .houseDetails{
     color:black;
     background-color: #008080cc;
     border-radius: 5px;
     display: inline-block;
 }
-table{
+table, .deleteForm, .createForm, .editForm{
     background-color: rgb(230, 255, 255, .85);
+    border-radius: 10px;
 }
 
-.deleteForm, .createForm, .editForm{
-    color: black;
-    background-color: #008080cc;
-    /* display: inline-block; */
+table, .deleteForm, .createForm, .editForm, .houseDetails{
+    margin-top:20px;
+    padding: 10px;
 }
+
+.houseDetails h3{
+    margin-top:0;
+}
+
 
 #diffNeighborhood{
     margin-top: 20px;

@@ -3,11 +3,11 @@
 @{
     ViewData["Title"] = "House Information";
 }
-
-<h2>
+<div class="houseDetails">
+<h3>
     @Html.DisplayFor(modelItem => modelItem.Address) <br />
     @Html.DisplayFor(modelItem => modelItem.City), @Html.DisplayFor(modelItem => modelItem.State) @Html.DisplayFor(modelItem => modelItem.ZipCode)
-</h2>
+</h3>
 
 @* if the house is the user's residence, add the house icon before the address *@
 @if (Model.IsResidence)
@@ -40,6 +40,7 @@
     <text>|</text> <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
 }
 
+</div>
 
 <table class="table">
     <thead>
