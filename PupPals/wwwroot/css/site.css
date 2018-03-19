@@ -44,6 +44,17 @@ table, .deleteForm, .createForm, .editForm, .houseDetails{
     margin-top:0;
 }
 
+.btn-default{
+    border-color: #000066;
+    background-color: rgb(230, 255, 255);
+    padding: 3px 8px;
+}
+
+.btn-default:hover{
+    background-color: #ccffff;
+    border-color: #000033;
+}
+
 
 #diffNeighborhood{
     margin-top: 20px;
