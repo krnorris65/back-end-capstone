@@ -7,8 +7,20 @@
 nav{
     background-color: #e6ffff;
 }
+.navbar-toggle .icon-bar {
+    background: #008080;
+}
+nav a{
+    color: #008080;
+}
+h2{
+    color:black;
+    background-color: #008080cc;
+    border-radius: 5px;
+    display: inline-block;
+}
 table{
-    background-color: rgb(230, 255, 255, .93);
+    background-color: rgb(230, 255, 255, .85);
 }
 
 #diffNeighborhood{
