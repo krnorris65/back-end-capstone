@@ -23,6 +23,12 @@ table{
     background-color: rgb(230, 255, 255, .85);
 }
 
+.deleteForm{
+    color: black;
+    background-color: #008080cc;
+    display: inline-block;
+}
+
 #diffNeighborhood{
     margin-top: 20px;
     margin-bottom: 10px;

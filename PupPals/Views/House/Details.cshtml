@@ -4,10 +4,10 @@
     ViewData["Title"] = "House Information";
 }
 
-<h3>
+<h2>
     @Html.DisplayFor(modelItem => modelItem.Address) <br />
     @Html.DisplayFor(modelItem => modelItem.City), @Html.DisplayFor(modelItem => modelItem.State) @Html.DisplayFor(modelItem => modelItem.ZipCode)
-</h3>
+</h2>
 
 @* if the house is the user's residence, add the house icon before the address *@
 @if (Model.IsResidence)
