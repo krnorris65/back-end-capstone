@@ -15,7 +15,7 @@ if (window.location.pathname == "/") {
             function createMap() {
                 //create map and center around the user's house
                 homeMap = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 15,
+                    zoom: 16,
                     //position is stored as a string so it must be parsed
                     center: JSON.parse(myHouse.position)
                 });

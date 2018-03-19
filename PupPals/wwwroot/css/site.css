@@ -83,13 +83,9 @@ table, .deleteForm, .createForm, .editForm, .houseDetails{
     width: 100%;
 }
 
-/* QR code generator */
-#qrCode {
-    margin: 15px;
-}
 
 #map {
-    height: 400px;
+    height: 500px;
     width: 100%;
 }
 
