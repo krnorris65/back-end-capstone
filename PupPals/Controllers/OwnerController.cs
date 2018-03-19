@@ -30,36 +30,6 @@ namespace PupPals.Controllers
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
 
-        // GET: Owner
-        public async Task<IActionResult> Index()
-        {
-            ApplicationUser user = await GetCurrentUserAsync();
-            //only return owners that are of houses that the user added
-            var applicationDbContext = _context.Owner.Include(o => o.House).Where(o => o.House.User == user);
-            return View(await applicationDbContext.ToListAsync());
-        }
-
-        // GET: Owner/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            ApplicationUser user = await GetCurrentUserAsync();
-
-            var owner = await _context.Owner
-                .Include(o => o.House)
-                .Where(o => o.House.User == user)
-                .SingleOrDefaultAsync(m => m.Id == id);
-            if (owner == null)
-            {
-                return NotFound();
-            }
-
-            return View(owner);
-        }
-
         // GET: Owner/Create
         public IActionResult Create(int houseId)
         {
@@ -78,7 +48,7 @@ namespace PupPals.Controllers
             {
                 _context.Add(owner);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Details), "House", new { id = owner.HouseId });
+                return RedirectToAction("Details", "House", new { id = owner.HouseId });
             }
 
             return View(owner);
@@ -137,7 +107,7 @@ namespace PupPals.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Details), "House", new { id = owner.HouseId }); ;
+                return RedirectToAction("Details", "House", new { id = owner.HouseId }); ;
             }
             //ViewData["HouseId"] = new SelectList(_context.House, "Id", "Address", owner.HouseId);
             return View(owner);
@@ -173,7 +143,7 @@ namespace PupPals.Controllers
             var owner = await _context.Owner.SingleOrDefaultAsync(m => m.Id == id);
             _context.Owner.Remove(owner);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Details), "House", new { id = owner.HouseId });
+            return RedirectToAction("Details", "House", new { id = owner.HouseId });
         }
 
         private bool OwnerExists(int id)

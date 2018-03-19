@@ -21,7 +21,7 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-light navbar-fixed-top" style="background-color: #e6ffff;">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -36,6 +36,7 @@
                 <ul class="nav navbar-nav">
                     @if (SignInManager.IsSignedIn(User))
                     {
+                        <li><a asp-controller="Home" asp-action="Index">Map</a></li>
                         <li><a asp-area="" asp-controller="House" asp-action="Index">House List</a></li>
                         <li><a asp-area="" asp-controller="Pet" asp-action="Index">View MyPets</a></li>
                     }
