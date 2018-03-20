@@ -4,47 +4,47 @@
     ViewData["Title"] = "House Information";
 }
 <div class="houseDetails">
-<h3>
-    @Html.DisplayFor(modelItem => modelItem.Address) <br />
-    @Html.DisplayFor(modelItem => modelItem.City), @Html.DisplayFor(modelItem => modelItem.State) @Html.DisplayFor(modelItem => modelItem.ZipCode)
-</h3>
+    <h3>
+        @Html.DisplayFor(modelItem => modelItem.Address) <br />
+        @Html.DisplayFor(modelItem => modelItem.City), @Html.DisplayFor(modelItem => modelItem.State) @Html.DisplayFor(modelItem => modelItem.ZipCode)
+    </h3>
 
-@* if the house is the user's residence, add the house icon before the address *@
-@if (Model.IsResidence)
-{
-    <h5><span class="glyphicon glyphicon-home"></span> This is my house</h5>
-}
-@* if the house is marked to avoid, add the avoid icon before the address *@
-@if (Model.Avoid)
-{
-    <h5><span class="glyphicon glyphicon-ban-circle" style="color:red"></span> Avoid this house on walks</h5>
-}
+    @* if the house is the user's residence, add the house icon before the address *@
+    @if (Model.IsResidence)
+    {
+        <h5><span class="glyphicon glyphicon-home"></span> This is my house</h5>
+    }
+    @* if the house is marked to avoid, add the avoid icon before the address *@
+    @if (Model.Avoid)
+    {
+        <h5><span class="glyphicon glyphicon-ban-circle" style="color:red"></span> Avoid this house on walks</h5>
+    }
 
-@if (Model.PetList.Any(p => p.BestFriend))
-{
-    <h5><span class="glyphicon glyphicon-star" style="color:darkgoldenrod"></span> One of my pet's best friends lives here!</h5>
+    @if (Model.PetList.Any(p => p.BestFriend))
+    {
+        <h5><span class="glyphicon glyphicon-star" style="color:darkgoldenrod"></span> One of my pet's best friends lives here!</h5>
 
-}
+    }
 
 
-@if(Model.Notes != null)
-{
-    <p>
-        <b>Notes: </b> @Html.DisplayFor(model => model.Notes)
-    </p>
+    @if(Model.Notes != null)
+    {
+        <p>
+            <b>Notes: </b> @Html.DisplayFor(model => model.Notes)
+        </p>
 
-}
+    }
 
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-@if(!Model.IsResidence){
-    <text>|</text> <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
-}
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+    @if(!Model.IsResidence){
+        <text>|</text> <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+    }
 
 </div>
 
-<div>
-<h2>Pets</h2>
-<a class="btn btn-default" asp-controller="Pet" asp-action="Create" asp-route-houseId="@Model.Id">Add Pet</a>
+<div class="petDetails">
+    <h2>Pets</h2> <br>
+    <a class="btn btn-default" asp-controller="Pet" asp-action="Create" asp-route-houseId="@Model.Id">Add Pet</a>
     <div class="flexContainer">
             @foreach (var item in Model.PetList)
             {
