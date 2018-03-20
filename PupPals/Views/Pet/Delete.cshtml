@@ -17,7 +17,9 @@
     <div>
         <hr />
         <dl class="dl-horizontal">
+        @if(@Model.Photo != null){
             <dd><img src="~/@Html.DisplayFor(model => model.Photo)" width="200"/></dd>
+        }
             <dt>
                 @Html.DisplayNameFor(model => model.Name)
             </dt>

@@ -65,12 +65,12 @@
                 }
                  @if (item.Name != null)
                  {
-                    <p>@Html.DisplayFor(modelItem => item.Name) (@Html.DisplayFor(modelItem => item.Type))</p>
+                    <p style="display:inline;">@Html.DisplayFor(modelItem => item.Name) (@Html.DisplayFor(modelItem => item.Type))</p>
                  }
                  else
                  {
 
-                    @Html.DisplayFor(modelItem => item.Type)
+                    <p>@Html.DisplayFor(modelItem => item.Type)</p>
 
                  }
 
