@@ -42,7 +42,7 @@ h2, .houseDetails, #diffNeighborhood, .welcomeScreen{
     display: inline-block;
     padding: 5px;
 }
-table, .deleteForm, .createForm, .editForm{
+table, .deleteForm, .createForm, .editForm, .petCard{
     background-color: rgb(230, 255, 255, .85);
     border-radius: 10px;
 }
@@ -52,6 +52,37 @@ table, .deleteForm, .createForm, .editForm, .houseDetails{
     padding: 10px;
 }
 
+.petCard{
+    margin: 10px;
+    width: 25rem;
+    height: auto;
+    position: relative;
+}
+.petCard .card-body{
+    padding: 5px;
+}
+.petImg{
+    width: inherit;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.pawPrintImg {
+    width: 15rem;
+    margin: 2rem 5rem;
+}
+.flexContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.petModify{
+    position: absolute;
+    bottom: .25rem;
+    right: .25rem;
+}
 .houseDetails h3{
     margin-top:0;
 }
