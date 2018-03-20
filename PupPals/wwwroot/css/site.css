@@ -24,11 +24,12 @@ a{
 a:hover{
     color: #000066;
 }
-h2, .houseDetails{
+h2, .houseDetails, #diffNeighborhood{
     color:black;
     background-color: #008080cc;
     border-radius: 5px;
     display: inline-block;
+    padding: 5px;
 }
 table, .deleteForm, .createForm, .editForm{
     background-color: rgb(230, 255, 255, .85);
@@ -59,6 +60,7 @@ table, .deleteForm, .createForm, .editForm, .houseDetails{
 #diffNeighborhood{
     margin-top: 20px;
     margin-bottom: 10px;
+    background: #008080;
 }
 
 #diffNeighborhood > h4 {
