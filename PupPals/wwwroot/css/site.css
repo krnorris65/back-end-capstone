@@ -1,4 +1,8 @@
-﻿body {
+﻿#PupPalsLogo{
+    height: 50px;
+    float: left;
+}
+body {
     background-color: #008080;
     padding-top: 50px;
     padding-bottom: 20px;
