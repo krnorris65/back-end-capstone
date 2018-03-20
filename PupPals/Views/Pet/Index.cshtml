@@ -1,114 +1,90 @@
 ﻿@model PupPals.Models.PetViewModels.PetListViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "MyPets";
 }
 
 
-<h2>My Pets</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Pet</th>
-            <th>Description of Pet</th>
-            <th>Notes</th>
-            <th>Lives at:</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.MyPets)
-        {
-        <tr>
-            <td>
-                @if(item.Photo != null){
-                    <img src="~/@Html.DisplayFor(model => item.Photo)" width="200"> <br />
-                }
-                @if (item.Name != null)
-                {
-                    <p>@Html.DisplayFor(modelItem => item.Name) (@Html.DisplayFor(modelItem => item.Type))</p>
-                }
-                else
-                {
+<h2>MyPets</h2>
 
-                    @Html.DisplayFor(modelItem => item.Type)
+    <div class="flexContainer">
+            @foreach (var item in Model.MyPets)
+            {
+                <div class="card petCard">
+                    @if(item.Photo != null){
+                        <img class="card-img-top petImg" src="~/@Html.DisplayFor(model => item.Photo)" alt="item.Type"> <br />
+                    }else{
+                        <img class="card-img-top pawPrintImg" src="../../images/pawPrint.png"> <br />
+                    }
+                    <div class="card-body">
+                        @if (item.Name != null)
+                        {
+                            <h4 style="display:inline;">@Html.DisplayFor(modelItem => item.Name) (@Html.DisplayFor(modelItem => item.Type))</h4>
+                        }
+                        else
+                        {
 
-                }
-            </td>
+                            <h4 style="display:inline;">@Html.DisplayFor(modelItem => item.Type)</h4>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Notes)
-            </td>
-            <td>
-                @if (item.House.IsResidence)
-                {
-                    <span class="glyphicon glyphicon-home"></span> @Html.DisplayFor(modelItem => item.House.Address)
+                        }
+                        <p class="card-text"><i>@Html.DisplayFor(modelItem => item.Description)</i></p>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Notes)</p>
+                        @if (item.House.IsResidence)
+                        {
+                            <span class="glyphicon glyphicon-home"></span>
 
-                }
-                else
-                {
-
-                     @Html.DisplayFor(modelItem => item.House.Address)
-
-                }
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id"><span class="glyphicon glyphicon-edit"></span></a> |
-                <a asp-action="Delete" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash"></span></a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                        }
+                        <a asp-controller="House" asp-action="Details" asp-route-id="@item.House.Id">@Html.DisplayFor(modelItem => item.House.Address)</a>
+                
+                    </div>
+                              <div class="petModify">
+                            <a asp-controller="Pet" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-controller="Pet" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </div>
+                </div>
+            }
+    </div>
 
 <h2>Best Friends</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Pet</th>
-            <th>Description of Pet</th>
-            <th>Notes</th>
-            <th>Lives at:</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.BestFriends)
-        {
-        <tr>
-            <td>
-                @if(item.Photo != null){
-                    <img src="~/@Html.DisplayFor(model => item.Photo)" width="200"> <br />
-                }
-                @if (item.Name != null)
-                {
-                    <p>@Html.DisplayFor(modelItem => item.Name) (@Html.DisplayFor(modelItem => item.Type))</p>
-                }
-                else
-                {
+    <div class="flexContainer">
+            @foreach (var item in Model.BestFriends)
+            {
+                <div class="card petCard">
+                    @if(item.Photo != null){
+                        <img class="card-img-top petImg" src="~/@Html.DisplayFor(model => item.Photo)" alt="item.Type"> <br />
+                    }else{
+                        <img class="card-img-top pawPrintImg" src="../../images/pawPrint.png"> <br />
+                    }
+                    <div class="card-body">
 
-                    @Html.DisplayFor(modelItem => item.Type)
+                        @if (item.Name != null)
+                        {
+                            <h4 style="display:inline;">@Html.DisplayFor(modelItem => item.Name) (@Html.DisplayFor(modelItem => item.Type))</h4>
+                        }
+                        else
+                        {
 
-                }
-            </td>
+                            <h4 style="display:inline;">@Html.DisplayFor(modelItem => item.Type)</h4>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Notes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.House.Address)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id"><span class="glyphicon glyphicon-edit"></span></a> |
-                <a asp-action="Delete" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash"></span></a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                        }
+                        <p class="card-text"><i>@Html.DisplayFor(modelItem => item.Description)</i></p>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Notes)</p>
+                        @if (item.House.IsResidence)
+                        {
+                            <span class="glyphicon glyphicon-home"></span>
+
+                        }
+                        @if (item.BestFriend)
+                        {
+                            <span class="glyphicon glyphicon-star" style="color:darkgoldenrod"></span>
+                        }
+                        <a asp-controller="House" asp-action="Details" asp-route-id="@item.House.Id">@Html.DisplayFor(modelItem => item.House.Address)</a>
+                        
+                    </div>
+                              <div class="petModify">
+                            <a asp-controller="Pet" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-controller="Pet" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </div>
+                </div>
+            }
+    </div>
