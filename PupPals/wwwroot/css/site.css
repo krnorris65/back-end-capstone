@@ -13,6 +13,7 @@ body {
     padding-top: 50px;
     padding-bottom: 20px;
     background-image: url("../images/tealPawPrint.jpg");
+    position: relative;
 }
 nav{
     background-color: #e6ffff;
@@ -77,17 +78,18 @@ table, .deleteForm, .createForm, .editForm, .houseDetails{
     display:inline;
 }
 
-footer {
+footer hr {
+    visibility: hidden;
+}
+
+footer p {
+    margin: 0px;
     position: absolute;
     right: 0;
     left: 0;
+    bottom:0;
     padding: 1rem;
     background: #008080cc;
-    margin-top: 5px;
-}
-footer p {
-    margin: 0px;
-    border-top: 1px solid #e6ffff;
 }
 
 
