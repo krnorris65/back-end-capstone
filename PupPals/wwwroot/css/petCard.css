@@ -1,0 +1,31 @@
+.petCard{
+    margin: 10px;
+    width: 25rem;
+    height: auto;
+    position: relative;
+}
+.petCard .card-body{
+    padding: 5px;
+}
+.petImg{
+    width: inherit;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.pawPrintImg {
+    width: 15rem;
+    margin: 2rem 5rem;
+}
+.flexContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.petModify{
+    position: absolute;
+    bottom: .25rem;
+    right: .25rem;
+}

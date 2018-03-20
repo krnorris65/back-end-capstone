@@ -52,37 +52,7 @@ table, .deleteForm, .createForm, .editForm, .houseDetails{
     padding: 10px;
 }
 
-.petCard{
-    margin: 10px;
-    width: 25rem;
-    height: auto;
-    position: relative;
-}
-.petCard .card-body{
-    padding: 5px;
-}
-.petImg{
-    width: inherit;
-    padding: 5px;
-    border-radius: 10px;
-}
 
-.pawPrintImg {
-    width: 15rem;
-    margin: 2rem 5rem;
-}
-.flexContainer{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
-
-.petModify{
-    position: absolute;
-    bottom: .25rem;
-    right: .25rem;
-}
 .houseDetails h3{
     margin-top:0;
 }
@@ -99,15 +69,6 @@ table, .deleteForm, .createForm, .editForm, .houseDetails{
 }
 
 
-#diffNeighborhood{
-    margin-top: 20px;
-    margin-bottom: 10px;
-    background: #008080;
-}
-
-#diffNeighborhood > h4 {
-    display:inline;
-}
 
 footer hr {
     visibility: hidden;
@@ -124,99 +85,14 @@ footer p {
 }
 
 
-/* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
-}
-
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
-}
-
-
-#map {
-    height: 450px;
-    width: 100%;
-}
-
-
-
-#infowindow-content .title {
-    font-weight: bold;
-}
-
-#infowindow-content {
-    display: none;
-}
-
-#map #infowindow-content {
-    display: inline;
-}
-
-.pac-card {
-    margin: 10px 10px 0 0;
-    border-radius: 2px 0 0 2px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    outline: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    background-color: #fff;
-    font-family: Roboto;
-}
-
-#pac-container {
-    padding-bottom: 12px;
-    margin-right: 12px;
-}
-
-.pac-controls {
-    display: inline-block;
-    padding: 5px 11px;
-}
-
-    .pac-controls label {
-        font-family: Roboto;
-        font-size: 13px;
-        font-weight: 300;
-    }
-
-#pac-input {
-    background-color: #fff;
-    font-family: Roboto;
-    font-size: 15px;
-    font-weight: 300;
-    margin-left: 12px;
-    padding: 0 11px 0 13px;
-    text-overflow: ellipsis;
-    width: 250px;
-}
-
-#pac-input:focus {
-    border-color: #4d90fe;
-}
-
-#title {
-    color: #fff;
-    background-color: #4d90fe;
-    font-size: 25px;
-    font-weight: 500;
-    padding: 6px 12px;
-}
 
 @media only screen and (max-width: 425px){
-    #map {
-        height: 300px;
-    }
-
     h2{
         font-size: 25px;
         margin-top: 10px;
