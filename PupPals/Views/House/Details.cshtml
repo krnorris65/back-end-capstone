@@ -94,9 +94,12 @@
                 <div class="card-body">
 
                     <h4 class="card-text">@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</h4>
-                    <p class="card-text"><span class="glyphicon glyphicon-earphone"></span> @Html.DisplayFor(modelItem => item.Phone)</p>
-                    <p class="card-text"><span class="glyphicon glyphicon-envelope"></span> @Html.DisplayFor(modelItem => item.Email)</p>
-            
+                    @if(item.Phone != null){
+                        <p class="card-text"><span class="glyphicon glyphicon-earphone"></span> @Html.DisplayFor(modelItem => item.Phone)</p>
+                    }
+                    @if(item.Email != null){
+                        <p class="card-text"><span class="glyphicon glyphicon-envelope"></span> @Html.DisplayFor(modelItem => item.Email)</p>
+                    }
                 </div>
                 <div class="itemModify">
                     <a asp-controller="Owner" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
