@@ -10,7 +10,7 @@
     <div class="flexContainer">
             @foreach (var item in Model.MyPets)
             {
-                <div class="card petCard">
+                <div class="card detailCard">
                     @if(item.Photo != null){
                         <img class="card-img-top petImg" src="~/@Html.DisplayFor(model => item.Photo)" alt="item.Type"> <br />
                     }else{
@@ -37,10 +37,10 @@
                         <a asp-controller="House" asp-action="Details" asp-route-id="@item.House.Id">@Html.DisplayFor(modelItem => item.House.Address)</a>
                 
                     </div>
-                              <div class="petModify">
-                            <a asp-controller="Pet" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-controller="Pet" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </div>
+                    <div class="itemModify">
+                        <a asp-controller="Pet" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-controller="Pet" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </div>
                 </div>
             }
     </div>
@@ -49,7 +49,7 @@
     <div class="flexContainer">
             @foreach (var item in Model.BestFriends)
             {
-                <div class="card petCard">
+                <div class="card detailCard">
                     @if(item.Photo != null){
                         <img class="card-img-top petImg" src="~/@Html.DisplayFor(model => item.Photo)" alt="item.Type"> <br />
                     }else{
@@ -81,10 +81,10 @@
                         <a asp-controller="House" asp-action="Details" asp-route-id="@item.House.Id">@Html.DisplayFor(modelItem => item.House.Address)</a>
                         
                     </div>
-                              <div class="petModify">
-                            <a asp-controller="Pet" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-controller="Pet" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </div>
+                    <div class="itemModify">
+                        <a asp-controller="Pet" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-controller="Pet" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </div>
                 </div>
             }
     </div>

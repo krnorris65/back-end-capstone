@@ -48,7 +48,7 @@
     <div class="flexContainer">
             @foreach (var item in Model.PetList)
             {
-                <div class="card petCard">
+                <div class="card detailCard">
                     @if(item.Photo != null){
                         <img class="card-img-top petImg" src="~/@Html.DisplayFor(model => item.Photo)" alt="item.Type"> <br />
                     }else{
@@ -73,53 +73,38 @@
                         <p class="card-text">@Html.DisplayFor(modelItem => item.Notes)</p>
               
                     </div>
-                              <div class="petModify">
-                            <a asp-controller="Pet" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-controller="Pet" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </div>
+                    <div class="itemModify">
+                        <a asp-controller="Pet" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-controller="Pet" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </div>
                 </div>
             }
     </div>
 
 </div>
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Owner</th>
-            <th>Phone Number</th>
-            <th>Email</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="ownerDetails">
+    <h2>Owners</h2> <br>
+    <a class="btn btn-default" asp-controller="Owner" asp-action="Create" asp-route-houseId="@Model.Id">Add Owner</a>
+    <div class="flexContainer">
         @foreach (var item in Model.OwnerList)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Phone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    <a asp-controller="Owner" asp-action="Edit" asp-route-id="@item.Id"><span class="glyphicon glyphicon-edit"></span></a> |
-                    <a asp-controller="Owner" asp-action="Delete" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
+            <div class="card detailCard">
+
+                <div class="card-body">
+
+                    <h4 class="card-text">@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</h4>
+                    <p class="card-text"><span class="glyphicon glyphicon-earphone"></span> @Html.DisplayFor(modelItem => item.Phone)</p>
+                    <p class="card-text"><span class="glyphicon glyphicon-envelope"></span> @Html.DisplayFor(modelItem => item.Email)</p>
+            
+                </div>
+                <div class="itemModify">
+                    <a asp-controller="Owner" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="Owner" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </div>
+            </div>
         }
-            <tr>
-                <td>
-                    <a asp-controller="Owner" asp-action="Create" asp-route-houseId="@Model.Id">Add Owner</a>
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-    </tbody>
-</table>
+    </div>
+</div>
+
 

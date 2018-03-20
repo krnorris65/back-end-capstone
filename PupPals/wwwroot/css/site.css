@@ -42,7 +42,7 @@ h2, .houseDetails, #diffNeighborhood, .welcomeScreen{
     display: inline-block;
     padding: 5px;
 }
-table, .deleteForm, .createForm, .editForm, .petCard{
+table, .deleteForm, .createForm, .editForm, .detailCard{
     background-color: rgb(230, 255, 255, .85);
     border-radius: 10px;
 }
