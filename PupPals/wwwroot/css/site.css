@@ -42,12 +42,16 @@ h2, .houseDetails, #diffNeighborhood, .welcomeScreen{
     display: inline-block;
     padding: 5px;
 }
-table, .deleteForm, .createForm, .editForm, .detailCard{
+
+.registerForm{
+    width: 50rem;
+}
+table, .deleteForm, .createForm, .editForm, .detailCard, .registerForm{
     background-color: rgb(230, 255, 255, .85);
     border-radius: 10px;
 }
 
-table, .deleteForm, .createForm, .editForm, .houseDetails{
+table, .deleteForm, .createForm, .editForm, .houseDetails, .registerForm{
     margin-top:20px;
     padding: 10px;
 }
