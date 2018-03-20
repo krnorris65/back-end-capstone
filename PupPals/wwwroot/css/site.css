@@ -14,6 +14,7 @@ body {
     padding-bottom: 20px;
     background-image: url("../images/tealPawPrint.jpg");
     position: relative;
+    color:black;
 }
 nav{
     background-color: #e6ffff;
@@ -25,9 +26,7 @@ nav a{
     color: #008080;
     font-weight: initial;
 }
-.houseDetails a{
-    color: rgb(230, 255, 255)
-}
+
 a{
     color: #004d4d;
     font-weight: bold;
@@ -35,12 +34,21 @@ a{
 a:hover{
     color: #000066;
 }
-h2, .houseDetails, #diffNeighborhood, .welcomeScreen{
-    color:black;
+
+.tealOverlay{
     background-color: #008080cc;
     border-radius: 5px;
-    display: inline-block;
     padding: 5px;
+    margin-top: 20px;
+}
+
+.houseDetails{
+    display: inline-block;
+}
+
+h2{
+    display: inline-block;
+    margin-top: 0px;
 }
 
 .registerForm{
@@ -56,9 +64,12 @@ table, .deleteForm, .createForm, .editForm, .houseDetails, .registerForm, .accou
     padding: 10px;
 }
 
-
 .houseDetails h3{
     margin-top:0;
+}
+
+.houseDetails a{
+    color: rgb(230, 255, 255)
 }
 
 .btn-default{
@@ -71,8 +82,6 @@ table, .deleteForm, .createForm, .editForm, .houseDetails, .registerForm, .accou
     background-color: #ccffff;
     border-color: #000033;
 }
-
-
 
 
 footer hr {

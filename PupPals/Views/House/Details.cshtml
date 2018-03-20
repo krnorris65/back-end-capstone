@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "House Information";
 }
-<div class="houseDetails">
+<div class="houseDetails tealOverlay">
     <h3>
         @Html.DisplayFor(modelItem => modelItem.Address) <br />
         @Html.DisplayFor(modelItem => modelItem.City), @Html.DisplayFor(modelItem => modelItem.State) @Html.DisplayFor(modelItem => modelItem.ZipCode)
@@ -42,7 +42,7 @@
 
 </div>
 
-<div class="petDetails">
+<div class="petDetails tealOverlay">
     <h2>Pets</h2> <br>
     <a class="btn btn-default" asp-controller="Pet" asp-action="Create" asp-route-houseId="@Model.Id">Add Pet</a>
     <div class="flexContainer">
@@ -83,7 +83,7 @@
 
 </div>
 
-<div class="ownerDetails">
+<div class="ownerDetails tealOverlay">
     <h2>Owners</h2> <br>
     <a class="btn btn-default" asp-controller="Owner" asp-action="Create" asp-route-houseId="@Model.Id">Add Owner</a>
     <div class="flexContainer">

@@ -4,9 +4,8 @@
     ViewData["Title"] = "MyPets";
 }
 
-
-<h2>MyPets</h2>
-
+<div class="petDetails tealOverlay">
+    <h2>MyPets</h2>
     <div class="flexContainer">
             @foreach (var item in Model.MyPets)
             {
@@ -44,8 +43,9 @@
                 </div>
             }
     </div>
-
-<h2>Best Friends</h2>
+</div>    
+<div class="petDetails tealOverlay">
+    <h2>Best Friends</h2>
     <div class="flexContainer">
             @foreach (var item in Model.BestFriends)
             {
@@ -88,3 +88,4 @@
                 </div>
             }
     </div>
+</div>

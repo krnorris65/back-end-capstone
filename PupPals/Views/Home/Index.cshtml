@@ -2,11 +2,12 @@
 @inject SignInManager<ApplicationUser> SignInManager
 
 @{
-    ViewData["Title"] = "PupPals";
+    ViewData["Title"] = "Map";
 }
-
+<div class="tealOverlay">
 @if (SignInManager.IsSignedIn(User))
 {
+
     <h2>Welcome to PupPals</h2>
     <div>
         <a asp-controller="House" asp-action="Create" class="btn btn-default">Add House to Map</a>
@@ -23,14 +24,11 @@
 } else {
     <div class="container">
         <div class="centered text-center">
-                <div class="welcomeScreen">
             <h1>Welcome to PupPals</h1>
             <h3>Keeping up with your pet's social network!</h3>
             <hr/>
-            <h4>To get started, please 
-                <a class="btn btn-default" asp-area="" asp-controller="Account" asp-action="Register">Register</a> or 
-                <a class="btn btn-default" asp-area="" asp-controller="Account" asp-action="Login">Log In</a></h4>
+            <h4>To get started, please <a class="btn btn-default" asp-area="" asp-controller="Account" asp-action="Register">Register</a> or <a class="btn btn-default" asp-area="" asp-controller="Account" asp-action="Login">Log In</a></h4>
         </div>
     </div>
-</div>
 }
+</div>
