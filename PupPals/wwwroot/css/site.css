@@ -80,10 +80,10 @@ table, .deleteForm, .createForm, .editForm, .houseDetails{
 footer {
     position: absolute;
     right: 0;
-    bottom: 0;
     left: 0;
     padding: 1rem;
     background: #008080cc;
+    margin-top: 5px;
 }
 footer p {
     margin: 0px;
