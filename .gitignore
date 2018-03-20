@@ -11,6 +11,7 @@
 appsettings.json
 *.db
 PupPals/wwwroot/images/house*
+.DS_Store
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
