@@ -46,12 +46,12 @@ h2, .houseDetails, #diffNeighborhood, .welcomeScreen{
 .registerForm{
     width: 50rem;
 }
-table, .deleteForm, .createForm, .editForm, .detailCard, .registerForm{
+table, .deleteForm, .createForm, .editForm, .detailCard, .registerForm, .accountForms{
     background-color: rgb(230, 255, 255, .85);
     border-radius: 10px;
 }
 
-table, .deleteForm, .createForm, .editForm, .houseDetails, .registerForm{
+table, .deleteForm, .createForm, .editForm, .houseDetails, .registerForm, .accountForms{
     margin-top:20px;
     padding: 10px;
 }
