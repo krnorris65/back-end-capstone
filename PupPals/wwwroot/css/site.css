@@ -1,6 +1,7 @@
 ﻿#PupPalsLogo{
     height: 50px;
     float: left;
+    margin-right: 10px;
 }
 body {
     background-color: #008080;
