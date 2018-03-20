@@ -3,6 +3,11 @@
     float: left;
     margin-right: 10px;
 }
+
+.welcomeScreen{
+    margin-top: 10%;
+}
+
 body {
     background-color: #008080;
     padding-top: 50px;
@@ -29,7 +34,7 @@ a{
 a:hover{
     color: #000066;
 }
-h2, .houseDetails, #diffNeighborhood{
+h2, .houseDetails, #diffNeighborhood, .welcomeScreen{
     color:black;
     background-color: #008080cc;
     border-radius: 5px;
@@ -79,14 +84,12 @@ footer {
     left: 0;
     padding: 1rem;
     background: #008080cc;
-  }
-  footer p {
-      margin: 0px;
-      border-top: 1px solid #e6ffff;
-  }
-  footer hr {
-      margin: 15px 0px;
-  }
+}
+footer p {
+    margin: 0px;
+    border-top: 1px solid #e6ffff;
+}
+
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */

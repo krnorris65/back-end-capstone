@@ -173,8 +173,6 @@ if (window.location.pathname == "/") {
                 createMap();
             })
 
-
-
             
 
         })//end of .then
