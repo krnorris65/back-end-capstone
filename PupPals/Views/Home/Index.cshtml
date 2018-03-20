@@ -7,7 +7,7 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <h2>Welcome to Pup Pals</h2>
+    <h2>Welcome to PupPals</h2>
     <div>
         <a asp-controller="House" asp-action="Create" class="btn btn-default">Add House to Map</a>
     </div>
@@ -19,5 +19,11 @@
     </div>
     <div>
         <a id="myNeighborhood" class="btn btn-default">My Neighborhood</a>
+    </div>
+} else {
+    <div class="welcomeScreen">
+        <h2>Welcome to PupPals</h2>
+        <h3>Keeping track of your pet's social network!</h3>
+        <h4>To get started, please register or login</h4>
     </div>
 }

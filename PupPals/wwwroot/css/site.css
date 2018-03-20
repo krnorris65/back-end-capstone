@@ -67,6 +67,22 @@ table, .deleteForm, .createForm, .editForm, .houseDetails{
     display:inline;
 }
 
+footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background: #008080cc;
+  }
+  footer p {
+      margin: 0px;
+      border-top: 1px solid #e6ffff;
+  }
+  footer hr {
+      margin: 15px 0px;
+  }
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
