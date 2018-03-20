@@ -77,12 +77,12 @@ footer hr {
 
 footer p {
     margin: 0px;
-    position: absolute;
+    position: fixed;
     right: 0;
     left: 0;
     bottom:0;
     padding: 1rem;
-    background: #008080cc;
+    background: #008080;
 }
 
 
