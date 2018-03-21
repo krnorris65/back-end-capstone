@@ -71,6 +71,7 @@ table, .deleteForm, .createForm, .editForm, .houseDetails, .registerForm, .accou
     width: 200px;
 }
 
+
 .houseDetails h3{
     margin-top:0;
 }
@@ -78,6 +79,12 @@ table, .deleteForm, .createForm, .editForm, .houseDetails, .registerForm, .accou
 .houseDetails a{
     color: rgb(230, 255, 255)
 }
+
+.listView{
+    text-align: right;
+    margin-bottom: 5px;
+}
+
 
 .btn-default{
     border-color: #000066;

@@ -41,8 +41,8 @@
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <li><a asp-controller="Home" asp-action="Index">Map</a></li>
-                        <li><a asp-area="" asp-controller="House" asp-action="Index">House List</a></li>
-                        <li><a asp-area="" asp-controller="Pet" asp-action="Index">View MyPets</a></li>
+                        // <li><a asp-area="" asp-controller="House" asp-action="Index">House List</a></li>
+                        <li><a asp-area="" asp-controller="Pet" asp-action="Index">MyPets</a></li>
                     }
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")

@@ -12,7 +12,11 @@
     <div>
         <a asp-controller="House" asp-action="Create" class="btn btn-default">Add House to Map</a>
     </div>
-    <hr />
+
+    <hr style="margin-bottom: 5px; margin-top: 5px;"/>
+    <div class="listView">
+        <a asp-controller="House" asp-action="Index" class="btn btn-default">List View</a>
+    </div>
     <div id="map"></div>
     <div id="diffNeighborhood">
         <h4>Walking in a different neighborhood?</h4>
