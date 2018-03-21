@@ -3,7 +3,7 @@ Keeping track of your pet's social network
 
 PupPals is a web application that allows users to track information about the houses they encounter while walking their pet. PupPals was built using ASP.NET MVC and connects to a SQLite database. This application utilizes the Google Maps Javascript API, Google Maps Geocoding API and Google Places API Web Service to create a visual representation of the information a user tracks and allows the user to search the map.
 
-To run the application on your computer:
+<strong> To run the application on your computer: </strong>
 1. Register for a Google Maps API key. Make sure the following APIs are enabled:
     * Google Maps JavaScript API
     * Google Maps Geocoding API
