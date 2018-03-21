@@ -16,8 +16,7 @@ if (window.location.pathname == "/") {
                 false:  'https://maps.google.com/mapfiles/ms/micons/blue-dot.png',
                 true: 'http://maps.google.com/mapfiles/ms/micons/red-dot.png',
                 best: 'https://maps.google.com/mapfiles/ms/micons/ltblue-dot.png',
-                myHouse: 'https://maps.google.com/mapfiles/ms/micons/purple-dot.png',
-                search:'https://maps.google.com/mapfiles/kml/pal4/icon57.png'
+                myHouse: 'https://maps.google.com/mapfiles/ms/micons/purple-dot.png'
             }
 
             function createMap() {
@@ -142,13 +141,6 @@ if (window.location.pathname == "/") {
                         return;
                     }
 
-                    let newMarker = new google.maps.Marker({
-                        map: homeMap,
-                        icon: icons["search"],
-                        position: place.geometry.location
-                    })
-
-                    console.log(newMarker)
 
                     if (place.geometry.viewport) {
                         // Only geocodes have viewport.
