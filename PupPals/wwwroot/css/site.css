@@ -64,6 +64,13 @@ table, .deleteForm, .createForm, .editForm, .houseDetails, .registerForm, .accou
     padding: 10px;
 }
 
+.deleteForm{
+    width: 500px;
+}
+.deleteForm img{
+    width: 200px;
+}
+
 .houseDetails h3{
     margin-top:0;
 }
@@ -111,5 +118,12 @@ footer p {
         font-size: 25px;
         margin-top: 10px;
         margin-bottom: 8px;
+    }
+
+    table{
+        font-size: 12px;
+    }
+    table a{
+        font-size: 9px;
     }
 }
