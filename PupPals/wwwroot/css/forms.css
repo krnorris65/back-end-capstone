@@ -8,8 +8,9 @@ table, .deleteForm, .createForm, .editForm, .detailCard, .registerForm, .account
 }
 
 table, .deleteForm, .createForm, .editForm, .houseDetails, .registerForm, .accountForms{
-    margin-top:20px;
+    margin:20px auto;
     padding: 10px;
+    position: relative;
 }
 
 .deleteForm{
@@ -31,4 +32,10 @@ table, .deleteForm, .createForm, .editForm, .houseDetails, .registerForm, .accou
 
 .formZip{
     width:70px;
+}
+
+.cancelBtn{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 }
