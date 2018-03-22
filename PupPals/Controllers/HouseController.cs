@@ -73,14 +73,22 @@ namespace PupPals.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(House house)
         {
+
             ModelState.Remove("User");
             if (ModelState.IsValid)
             {
                 ApplicationUser user = await GetCurrentUserAsync();
                 house.User = user;
-                _context.Add(house);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Details), new { @id = house.Id });
+                //if user already added this house then don't add it again, redirect user to that house detail page
+                var houseInDB = await _context.House.Where(h => h.User == house.User).SingleOrDefaultAsync(m => m.Position == house.Position);
+
+                if(houseInDB == null){
+                    _context.Add(house);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Details), new { @id = house.Id });
+                }else{
+                    return RedirectToAction(nameof(Details), new { @id = houseInDB.Id });
+                }
             }
             return View(house);
         }

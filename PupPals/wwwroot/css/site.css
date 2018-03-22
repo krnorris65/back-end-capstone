@@ -52,35 +52,14 @@ a:hover{
     margin-top: 20px;
 }
 
-.houseDetails{
-    display: inline-block;
-}
-
 h2{
     display: inline-block;
     margin-top: 0px;
 }
 
-.registerForm{
-    width: 50rem;
+.houseDetails{
+    display: inline-block;
 }
-table, .deleteForm, .createForm, .editForm, .detailCard, .registerForm, .accountForms{
-    background-color: rgb(230, 255, 255, .85);
-    border-radius: 10px;
-}
-
-table, .deleteForm, .createForm, .editForm, .houseDetails, .registerForm, .accountForms{
-    margin-top:20px;
-    padding: 10px;
-}
-
-.deleteForm{
-    width: 500px;
-}
-.deleteForm img{
-    width: 200px;
-}
-
 
 .houseDetails h3{
     margin-top:0;

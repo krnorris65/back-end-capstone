@@ -1,0 +1,41 @@
+.registerForm{
+    width: 50rem;
+}
+
+table, .deleteForm, .createForm, .editForm, .detailCard, .registerForm, .accountForms{
+    background-color: rgb(230, 255, 255, .85);
+    border-radius: 10px;
+}
+
+table, .deleteForm, .createForm, .editForm, .houseDetails, .registerForm, .accountForms{
+    margin:20px auto;
+    padding: 10px;
+    position: relative;
+}
+
+.deleteForm{
+    max-width: 500px;
+}
+
+.createForm, .editForm{
+    max-width: 300px;
+}
+
+
+.deleteForm img{
+    width: 200px;
+}
+
+.formState{
+    width: 50px;
+}
+
+.formZip{
+    width:70px;
+}
+
+.cancelBtn{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
