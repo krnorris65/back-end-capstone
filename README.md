@@ -28,8 +28,8 @@ PupPals is a web application that allows users to track information about the ho
       }
     ```
  4. `dotnet restore` to install required packages
- 5. Run `dotnet ef database update` to create your database. <br>
+ 5. Run `dotnet ef database update` to create your database. 
  6. `cd PupPals`
- 7. `dotnet run`
+ 7. `dotnet run` <br>
  NOTE: This application is configured for a SQLite database file.
     
